@@ -1,17 +1,33 @@
 {
-	"credit": "Made with Blockbench",
-	"parent": "item/generated",
-	"textures": {
-		"layer0": "sculkdecor:item/sculk_bone"
-	},
-	"display": {
-		"thirdperson_righthand": {
-			"rotation": [42.75, 90, 0],
-			"translation": [0, 4.5, 2]
-		},
-		"thirdperson_lefthand": {
-			"rotation": [-42.74, 90, 0],
-			"translation": [0, 4.5, 2]
-		}
-	}
+  "credit": "Made with Blockbench",
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "sculkdecor:item/sculk_bone"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        42.75,
+        90,
+        0
+      ],
+      "translation": [
+        0,
+        4.5,
+        2
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        -42.74,
+        90,
+        0
+      ],
+      "translation": [
+        0,
+        4.5,
+        2
+      ]
+    }
+  }
 }

@@ -1,40 +1,40 @@
 {
-	"schemaVersion": 1,
-	"id": "sculkdecor",
-	"version": "${version}",
-	"name": "Sculkman's Decor",
-	"description": "This mod adds decoration using sculk blocks, made by Jeremiah_No",
-	"authors": [
-		"Jeremiah_No"
-	],
-	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
-	},
-	"license": "MIT",
-	"icon": "assets/sculkdecor/icon.png",
-	"environment": "*",
-	"entrypoints": {
-		"main": [
-			"net.jeremiah.sculkdecor.SculkmansDecor"
-		],
-		"client": [
-			"net.jeremiah.sculkdecor.SculkmansDecorClient"
-		],
-		"fabric-datagen": [
-			"net.jeremiah.sculkdecor.SculkmansDecorDataGenerator"
-		]
-	},
-	"mixins": [
-		"sculkdecor.mixins.json"
-	],
-	"depends": {
-		"fabricloader": ">=0.16.14",
-		"minecraft": "~1.20.1",
-		"java": ">=17",
-		"fabric-api": "*"
-	},
-	"suggests": {
-		"another-mod": "*"
-	}
+  "schemaVersion": 1,
+  "id": "sculkdecor",
+  "version": "${version}",
+  "name": "Sculkman's Decor",
+  "description": "This mod adds decoration using sculk blocks, made by Jeremiah_No",
+  "authors": [
+    "Jeremiah_No"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+  "license": "MIT",
+  "icon": "assets/sculkdecor/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.jeremiah.sculkdecor.SculkmansDecor"
+    ],
+    "client": [
+      "net.jeremiah.sculkdecor.SculkmansDecorClient"
+    ],
+    "fabric-datagen": [
+      "net.jeremiah.sculkdecor.SculkmansDecorDataGenerator"
+    ]
+  },
+  "mixins": [
+    "sculkdecor.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.14",
+    "minecraft": "~1.20.1",
+    "java": ">=17",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
 }
