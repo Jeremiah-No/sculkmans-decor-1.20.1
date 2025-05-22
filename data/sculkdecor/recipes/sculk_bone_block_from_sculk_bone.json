@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "sculkdecor:sculk_bone"
+    }
+  },
+  "result": {
+    "item": "sculkdecor:sculk_bone_block"
+  }
+}
