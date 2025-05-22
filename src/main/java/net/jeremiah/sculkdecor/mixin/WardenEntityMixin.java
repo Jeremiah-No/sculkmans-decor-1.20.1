@@ -75,12 +75,12 @@ public class WardenEntityMixin implements WardenEntityExt {
     @SuppressWarnings("mixin")
 
     @Override
-    public @Nullable GameProfile sculkmans_decor$getSummoner() {
+    public @Nullable GameProfile sculkdecor$getSummoner() {
         return summoner;
     }
 
     @Override
-    public void sculkmans_decor$setSummoner(@Nullable GameProfile plr) {
+    public void sculkdecor$setSummoner(@Nullable GameProfile plr) {
         summoner = plr;
     }
 }

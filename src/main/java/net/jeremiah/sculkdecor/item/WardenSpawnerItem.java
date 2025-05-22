@@ -31,7 +31,7 @@ public class WardenSpawnerItem extends Item {
                 return TypedActionResult.fail(handStack);
             }
             var warden = warden_opt.get();
-            ((WardenEntityExt) warden).sculkmans_decor$setSummoner(user.getGameProfile());
+            ((WardenEntityExt) warden).sculkdecor$setSummoner(user.getGameProfile());
         }
         return TypedActionResult.success(handStack, true);
     }

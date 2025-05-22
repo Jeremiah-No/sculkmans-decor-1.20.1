@@ -24,7 +24,7 @@ public class StatusEffectUtilsMixin {
                                                          int duration, CallbackInfoReturnable<List<ServerPlayerEntity>> cir,
                                                          @Local List<ServerPlayerEntity> list) {
         if (entity == null) return;
-        var summoner = ((WardenEntityExt) entity).sculkmans_decor$getSummoner();
+        var summoner = ((WardenEntityExt) entity).sculkdecor$getSummoner();
         if (summoner == null) return;
         list.removeIf((p) -> p.getGameProfile().getId().equals(summoner.getId()));
     }

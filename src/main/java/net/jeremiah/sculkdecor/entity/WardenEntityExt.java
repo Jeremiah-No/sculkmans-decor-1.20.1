@@ -4,7 +4,7 @@ import com.mojang.authlib.GameProfile;
 import org.jetbrains.annotations.Nullable;
 
 public interface WardenEntityExt {
-    @Nullable GameProfile sculkmans_decor$getSummoner();
+    @Nullable GameProfile sculkdecor$getSummoner();
 
-    void sculkmans_decor$setSummoner(@Nullable GameProfile plr);
+    void sculkdecor$setSummoner(@Nullable GameProfile plr);
 }
