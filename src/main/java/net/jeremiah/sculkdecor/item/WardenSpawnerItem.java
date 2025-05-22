@@ -1,5 +1,6 @@
 package net.jeremiah.sculkdecor.item;
 
+import net.jeremiah.sculkdecor.entity.WardenEntityExt;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LargeEntitySpawnHelper;
 import net.minecraft.entity.SpawnReason;
@@ -23,9 +24,14 @@ public class WardenSpawnerItem extends Item {
             return TypedActionResult.pass(handStack);
         }
         if (!world.isClient()) {
-            LargeEntitySpawnHelper.trySpawnAt(EntityType.WARDEN, SpawnReason.TRIGGERED, (ServerWorld) world,
+            var warden_opt = LargeEntitySpawnHelper.trySpawnAt(EntityType.WARDEN, SpawnReason.TRIGGERED, (ServerWorld) world,
                     user.getBlockPos(), 20, 5, 6,
                     LargeEntitySpawnHelper.Requirements.WARDEN);
+            if (warden_opt.isEmpty()) {
+                return TypedActionResult.fail(handStack);
+            }
+            var warden = warden_opt.get();
+            ((WardenEntityExt)warden).setSummoner(user.getGameProfile());
         }
         return TypedActionResult.success(handStack, true);
     }
