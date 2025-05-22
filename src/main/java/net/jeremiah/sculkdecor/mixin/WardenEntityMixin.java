@@ -9,7 +9,6 @@ import net.minecraft.entity.mob.WardenEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtHelper;
-import net.minecraft.nbt.NbtList;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -18,7 +17,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
 import java.util.UUID;
 
 @Mixin(WardenEntity.class)
@@ -46,7 +44,7 @@ public class WardenEntityMixin implements WardenEntityExt {
                                               @Local boolean bl,
                                               @Local Entity entity) {
         if (entity instanceof PlayerEntity plr &&
-            plr.getGameProfile().getId().equals(summoner != null ? getUUID() : null)) {
+                plr.getGameProfile().getId().equals(summoner != null ? getUUID() : null)) {
             cir.setReturnValue(bl);
         }
     }
@@ -74,13 +72,15 @@ public class WardenEntityMixin implements WardenEntityExt {
         }
     }
 
+    @SuppressWarnings("mixin")
+
     @Override
-    public @Nullable GameProfile getSummoner() {
+    public @Nullable GameProfile sculkmans_decor$getSummoner() {
         return summoner;
     }
 
     @Override
-    public void setSummoner(@Nullable GameProfile plr) {
+    public void sculkmans_decor$setSummoner(@Nullable GameProfile plr) {
         summoner = plr;
     }
 }
