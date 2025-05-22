@@ -19,7 +19,7 @@ public class ModItemGroups {
                     .entries((displayContext, entries) -> {
                         entries.add((ModItems.SCULK_BONE));
                         entries.add((ModItems.SCULK_BONE_BLOCK));
-                        entries.add((ModItems.WARDEN_SPAWNER));
+                        entries.add((ModItems.ECHO_GLAIVE));
 
                         entries.add((Items.SCULK));
                         entries.add((Items.WARDEN_SPAWN_EGG));
@@ -35,6 +35,9 @@ public class ModItemGroups {
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register((e) -> {
             e.add(ModItems.SCULK_BONE);
+        });
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register((e) -> {
+            e.add(ModItems.ECHO_GLAIVE);
         });
     }
 }

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " ES",
+    " BE",
+    "B  "
+  ],
+  "key": {
+    "E": {
+      "item": "minecraft:echo_shard"
+    },
+    "S": {
+      "item": "minecraft:netherite_sword"
+    },
+    "B": {
+      "item": "sculkdecor:sculk_bone"
+    }
+  }
+}
