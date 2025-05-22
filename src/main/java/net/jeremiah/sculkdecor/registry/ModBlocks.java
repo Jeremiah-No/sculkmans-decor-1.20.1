@@ -3,6 +3,7 @@ package net.jeremiah.sculkdecor.registry;
 import net.jeremiah.sculkdecor.SculkmansDecor;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.ai.brain.task.SonicBoomTask;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 

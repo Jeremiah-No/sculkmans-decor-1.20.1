@@ -18,7 +18,9 @@ public class ModItemGroups {
                     .icon(() -> new ItemStack(Items.SCULK_CATALYST))
                     .entries((displayContext, entries) -> {
                         entries.add((ModItems.SCULK_BONE));
-                        entries.add((ModBlocks.SCULK_BONE_BLOCK));
+                        entries.add((ModItems.SCULK_BONE_BLOCK));
+                        entries.add((ModItems.WARDEN_SPAWNER));
+
                         entries.add((Items.SCULK));
                         entries.add((Items.WARDEN_SPAWN_EGG));
                         entries.add((Items.SCULK_VEIN));
