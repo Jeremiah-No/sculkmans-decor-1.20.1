@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    " ES",
+    " WS",
     " BE",
     "B  "
   ],
@@ -12,8 +12,15 @@
     "S": {
       "item": "minecraft:netherite_sword"
     },
+    "W": {
+      "item": "minecraft:sculk_shrieker"
+    },
     "B": {
       "item": "sculkdecor:sculk_bone"
     }
+  },
+  "result": {
+    "item": "sculkdecor:echo_glaive",
+    "count": 1
   }
 }
