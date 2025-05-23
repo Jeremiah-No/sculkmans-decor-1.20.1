@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "sculkdecor:item/echo_glaive"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "sculkdecore:gui": 1
+      },
+      "model": "sculkdecor:item/echo_glaive_handheld"
+    }
+  ]
+}

@@ -3,9 +3,10 @@
   "id": "sculkdecor",
   "version": "${version}",
   "name": "Sculkman's Decor",
-  "description": "This mod adds decoration using sculk blocks, made by Jeremiah_No",
+  "description": "This mod adds decoration using sculk blocks, made by Jeremiah_No and Zetaclix",
   "authors": [
-    "Jeremiah_No"
+    "Jeremiah_No",
+    "Zetaclix"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
