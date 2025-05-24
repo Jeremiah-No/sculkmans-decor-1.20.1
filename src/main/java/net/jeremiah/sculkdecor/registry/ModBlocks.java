@@ -9,6 +9,10 @@ import net.minecraft.registry.Registry;
 public class ModBlocks {
     public static final Block SCULK_BONE_BLOCK = registerBlock("sculk_bone_block",
             new Block(Block.Settings.copy(Blocks.BONE_BLOCK)));
+    public static final Block SCULK_BONE_BLOCK_BRICKS = registerBlock("sculk_bone_block_bricks",
+            new Block(Block.Settings.copy(Blocks.BONE_BLOCK)));
+    public static final Block CHISELED_SCULK_BONE_BRICKS = registerBlock("chiseled_sculk_bone_bricks",
+            new Block(Block.Settings.copy(Blocks.BONE_BLOCK)));
 
     private static Block registerBlock(String name, Block block) {
         return Registry.register(Registries.BLOCK, SculkmansDecor.id(name), block);

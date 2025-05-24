@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "sculkdecor:block/chiseled_sculk_bone_bricks"
+  }
+}
