@@ -20,7 +20,7 @@ public class ItemRendererMixin {
         final var itemModels = CustomItemModels.getItemModels();
         final var modelID = itemModels.get(stack.getItem());
         if (modelID == null || renderMode == ModelTransformationMode.GUI) return value;
-        return ((ItemRendererAccessor)this)
+        return ((ItemRendererAccessor) this)
                 .sculkdecor$getModels()
                 .getModelManager()
                 .getModel(modelID);

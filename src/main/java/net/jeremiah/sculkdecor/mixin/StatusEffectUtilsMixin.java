@@ -2,6 +2,7 @@ package net.jeremiah.sculkdecor.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import net.jeremiah.sculkdecor.entity.WardenEntityExt;
+import net.jeremiah.sculkdecor.utils.PlayerUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffectUtil;
@@ -26,6 +27,6 @@ public class StatusEffectUtilsMixin {
         if (entity == null) return;
         var summoner = ((WardenEntityExt) entity).sculkdecor$getSummoner();
         if (summoner == null) return;
-        list.removeIf((p) -> p.getGameProfile().getId().equals(summoner.getId()));
+        list.removeIf((p) -> PlayerUtils.playerMatch(p, summoner));
     }
 }

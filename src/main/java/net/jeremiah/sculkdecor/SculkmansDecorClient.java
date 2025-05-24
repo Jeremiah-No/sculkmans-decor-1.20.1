@@ -7,5 +7,6 @@ import net.jeremiah.sculkdecor.utils.CustomItemModels;
 public class SculkmansDecorClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        CustomItemModels.registerItemModel(ModItems.ECHO_GLAIVE, SculkmansDecor.id("echo_glaive_handheld"), "inventory");}
+        CustomItemModels.registerItemModel(ModItems.ECHO_GLAIVE, SculkmansDecor.id("echo_glaive_handheld"), "inventory");
+    }
 }
