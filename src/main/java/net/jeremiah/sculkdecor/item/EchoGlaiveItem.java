@@ -55,34 +55,24 @@ public class EchoGlaiveItem extends SwordItem {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         var handStack = user.getStackInHand(hand);
-
-        // Only trigger if the player is sneaking
-        if (!user.isSneaking()) {
-            return TypedActionResult.pass(handStack);
-        }
-
         if (!(handStack.getItem() instanceof EchoGlaiveItem)) {
             return TypedActionResult.pass(handStack);
         }
-
         if (!world.isClient()) {
-            var warden_opt = LargeEntitySpawnHelper.trySpawnAt(
-                    EntityType.WARDEN, SpawnReason.TRIGGERED,
-                    (ServerWorld) world, user.getBlockPos(),
-                    20, 5, 6,
-                    LargeEntitySpawnHelper.Requirements.WARDEN
-            );
-
+            var warden_opt = LargeEntitySpawnHelper.trySpawnAt(EntityType.WARDEN, SpawnReason.TRIGGERED, (ServerWorld) world,
+                    user.getBlockPos(), 20, 5, 6,
+                    LargeEntitySpawnHelper.Requirements.WARDEN);
             if (warden_opt.isEmpty()) {
                 return TypedActionResult.fail(handStack);
             }
-
             var warden = warden_opt.get();
             warden.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, -1, 3, false, false));
             ((WardenEntityExt) warden).sculkdecor$setSummoner(user.getGameProfile());
+            if (!user.getAbilities().creativeMode) {
+                user.getItemCooldownManager().set(this, 20 * 30);
+            }
+            return TypedActionResult.success(handStack, true);
         }
-
-        return TypedActionResult.success(handStack, true);
+        return TypedActionResult.success(handStack, false);
     }
-
 }
