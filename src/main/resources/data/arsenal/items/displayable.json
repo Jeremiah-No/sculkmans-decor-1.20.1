@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "#minecraft:tools",
+      "required": false
+    },
+    "#arsenal:big_weapons",
+    "sculkdecor:echo_glaive",
+    "#arsenal:shields",
+    "#arsenal:ranged_weapons",
+    "#arsenal:tridents"
+  ]
+}

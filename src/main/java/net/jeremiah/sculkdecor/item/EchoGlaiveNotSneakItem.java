@@ -25,13 +25,13 @@ import net.minecraft.world.World;
 
 import java.util.UUID;
 
-public class EchoGlaiveItem extends SwordItem {
+public class EchoGlaiveNotSneakItem extends SwordItem {
     protected static final UUID ATTACK_REACH_MODIFIER_ID = UUID.fromString("76a8dee3-3e7e-4e11-ba46-a19b0c724567");
     protected static final UUID REACH_MODIFIER_ID = UUID.fromString("a31c8afc-a716-425d-89cd-0d373380e6e7");
 
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 
-    public EchoGlaiveItem() {
+    public EchoGlaiveNotSneakItem() {
         super(ModToolMaterial.ECHO_SHARD, 1, 1.2f, new Settings()
                 .fireproof()
                 .rarity(Rarity.EPIC));
@@ -55,34 +55,20 @@ public class EchoGlaiveItem extends SwordItem {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         var handStack = user.getStackInHand(hand);
-
-        // Only trigger if the player is sneaking
-        if (!user.isSneaking()) {
+        if (!(handStack.getItem() instanceof EchoGlaiveNotSneakItem)) {
             return TypedActionResult.pass(handStack);
         }
-
-        if (!(handStack.getItem() instanceof EchoGlaiveItem)) {
-            return TypedActionResult.pass(handStack);
-        }
-
         if (!world.isClient()) {
-            var warden_opt = LargeEntitySpawnHelper.trySpawnAt(
-                    EntityType.WARDEN, SpawnReason.TRIGGERED,
-                    (ServerWorld) world, user.getBlockPos(),
-                    20, 5, 6,
-                    LargeEntitySpawnHelper.Requirements.WARDEN
-            );
-
+            var warden_opt = LargeEntitySpawnHelper.trySpawnAt(EntityType.WARDEN, SpawnReason.TRIGGERED, (ServerWorld) world,
+                    user.getBlockPos(), 20, 5, 6,
+                    LargeEntitySpawnHelper.Requirements.WARDEN);
             if (warden_opt.isEmpty()) {
                 return TypedActionResult.fail(handStack);
             }
-
             var warden = warden_opt.get();
             warden.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, -1, 3, false, false));
             ((WardenEntityExt) warden).sculkdecor$setSummoner(user.getGameProfile());
         }
-
         return TypedActionResult.success(handStack, true);
     }
-
 }

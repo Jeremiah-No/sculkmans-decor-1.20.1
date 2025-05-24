@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "arsenal:scythe",
+    "arsenal:anchorblade",
+    "sculkdecor:echo_glaive",
+    "#arsenal:tridents"
+  ]
+}
