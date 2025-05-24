@@ -29,8 +29,8 @@ public abstract class PlayerEntityMixin extends Entity {
     @Inject(method = "interact", at = @At("HEAD"), cancellable = true)
     private void sculkdecor$interactWarden(Entity entity, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
         if (this.isSneaking() && entity instanceof WardenEntity warden) {
-            final var wext = (WardenEntityExt)warden;
-            if (!PlayerUtils.playerMatch((PlayerEntity)(Entity) this, wext.sculkdecor$getSummoner())) {
+            final var wext = (WardenEntityExt) warden;
+            if (!PlayerUtils.playerMatch((PlayerEntity) (Entity) this, wext.sculkdecor$getSummoner())) {
                 return;
             }
 

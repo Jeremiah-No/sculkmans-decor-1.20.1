@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
+@SuppressWarnings("unused")
 public class PlayerUtils {
     public static UUID getPlayerUUID(@NotNull PlayerEntity plr) {
         return plr.getGameProfile().getId();

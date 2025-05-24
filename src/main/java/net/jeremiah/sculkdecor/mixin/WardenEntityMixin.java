@@ -6,7 +6,6 @@ import net.jeremiah.sculkdecor.entity.WardenEntityExt;
 import net.jeremiah.sculkdecor.utils.PlayerUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ai.brain.Brain;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.WardenEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -15,14 +14,11 @@ import net.minecraft.nbt.NbtHelper;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import java.util.UUID;
 
 // TODO: Make all owned wardens attack a target when the summoner attack an entity (exclude other wardens)
 @Mixin(WardenEntity.class)
@@ -32,14 +28,6 @@ public abstract class WardenEntityMixin extends Entity implements WardenEntityEx
 
     private WardenEntityMixin(EntityType<?> type, World world) {
         super(type, world);
-    }
-
-    @Shadow
-    public abstract Brain<WardenEntity> getBrain();
-
-    @Unique
-    private @Nullable UUID getUUID() {
-        return summoner != null ? summoner.getId() : null;
     }
 
     @Inject(method = "isValidTarget", at = @At("HEAD"), cancellable = true)
