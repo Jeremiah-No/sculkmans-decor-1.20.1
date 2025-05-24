@@ -10,6 +10,8 @@
     "defaultRequire": 1
   },
   "client": [
-    "client.DrawContextMixin"
+    "client.ItemRendererAccessor",
+    "client.ItemRendererMixin",
+    "client.ModelLoaderMixin"
   ]
 }

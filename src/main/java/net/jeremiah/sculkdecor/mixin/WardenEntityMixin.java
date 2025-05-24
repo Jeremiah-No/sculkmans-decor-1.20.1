@@ -19,6 +19,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.UUID;
 
+// TODO: Make all owned wardens attack a target when the summoner attack an entity (exclude other wardens)
+// TODO: Make owned wardens being able to be 1-shotted by sneak + right click
 @Mixin(WardenEntity.class)
 public class WardenEntityMixin implements WardenEntityExt {
     @Unique

@@ -68,7 +68,11 @@ public class EchoGlaiveItem extends SwordItem {
             var warden = warden_opt.get();
             warden.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, -1, 3, false, false));
             ((WardenEntityExt) warden).sculkdecor$setSummoner(user.getGameProfile());
+            if (!user.getAbilities().creativeMode) {
+                user.getItemCooldownManager().set(this, 20 * 30);
+            }
+            return TypedActionResult.success(handStack, true);
         }
-        return TypedActionResult.success(handStack, true);
+        return TypedActionResult.success(handStack, false);
     }
 }
