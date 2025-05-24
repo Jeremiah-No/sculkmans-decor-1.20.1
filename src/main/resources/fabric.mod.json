@@ -9,8 +9,8 @@
     "Zetaclix"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "issues": "https://github.com/Jeremiah-No/sculkmans-decor-1.20.1/issues",
+    "sources": "https://github.com/Jeremiah-No/sculkmans-decor-1.20.1"
   },
   "license": "MIT",
   "icon": "assets/sculkdecor/icon.png",
@@ -21,9 +21,6 @@
     ],
     "client": [
       "net.jeremiah.sculkdecor.SculkmansDecorClient"
-    ],
-    "fabric-datagen": [
-      "net.jeremiah.sculkdecor.SculkmansDecorDataGenerator"
     ]
   },
   "mixins": [
@@ -34,8 +31,5 @@
     "minecraft": "~1.20.1",
     "java": ">=17",
     "fabric-api": "*"
-  },
-  "suggests": {
-    "another-mod": "*"
   }
 }

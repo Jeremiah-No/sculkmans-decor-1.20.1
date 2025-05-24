@@ -28,6 +28,7 @@ import java.util.UUID;
 public class EchoGlaiveItem extends SwordItem {
     protected static final UUID ATTACK_REACH_MODIFIER_ID = UUID.fromString("76a8dee3-3e7e-4e11-ba46-a19b0c724567");
     protected static final UUID REACH_MODIFIER_ID = UUID.fromString("a31c8afc-a716-425d-89cd-0d373380e6e7");
+    protected static final double WARDEN_SUMMON_COOLDOWN = 30;
 
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 
@@ -55,7 +56,7 @@ public class EchoGlaiveItem extends SwordItem {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         var handStack = user.getStackInHand(hand);
-        if (!(handStack.getItem() instanceof EchoGlaiveItem)) {
+        if (!(handStack.getItem() instanceof EchoGlaiveItem && user.isSneaking())) {
             return TypedActionResult.pass(handStack);
         }
         if (!world.isClient()) {
@@ -69,10 +70,10 @@ public class EchoGlaiveItem extends SwordItem {
             warden.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, -1, 3, false, false));
             ((WardenEntityExt) warden).sculkdecor$setSummoner(user.getGameProfile());
             if (!user.getAbilities().creativeMode) {
-                user.getItemCooldownManager().set(this, 20 * 30);
+                user.getItemCooldownManager().set(this, (int)(20 * WARDEN_SUMMON_COOLDOWN));
             }
             return TypedActionResult.success(handStack, true);
         }
-        return TypedActionResult.success(handStack, false);
+        return TypedActionResult.success(handStack);
     }
 }
