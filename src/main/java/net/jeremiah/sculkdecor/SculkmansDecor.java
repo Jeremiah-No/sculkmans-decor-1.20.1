@@ -49,7 +49,6 @@ public class SculkmansDecor implements ModInitializer {
                         assert playerEntity != null;
                         SonicBoomUtils.create((ServerWorld) world, playerEntity, null, dist);
                         for (LivingEntity target : targets) {
-                            LOGGER.info("Booming: " + target.getId());
                             SonicBoomUtils.noParticles((ServerWorld) world, playerEntity, target, dist.normalize());
                         }
                     });
