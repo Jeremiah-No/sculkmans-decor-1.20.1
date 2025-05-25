@@ -8,21 +8,28 @@ import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.jeremiah.sculkdecor.SculkmansDecor;
 import net.jeremiah.sculkdecor.entity.WardenEntityExt;
 import net.jeremiah.sculkdecor.registry.ModToolMaterial;
+import net.jeremiah.sculkdecor.utils.RaycastUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSources;
+import net.minecraft.entity.mob.WardenEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.hit.HitResult;
+import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import java.util.UUID;
@@ -31,12 +38,16 @@ public final class EchoGlaiveItem extends SwordItem {
     public static final Identifier SONIC_BOOM_PACKET_ID = SculkmansDecor.id("sonic_boom");
     private static final UUID ATTACK_REACH_MODIFIER_ID = UUID.fromString("76a8dee3-3e7e-4e11-ba46-a19b0c724567");
     private static final UUID REACH_MODIFIER_ID = UUID.fromString("a31c8afc-a716-425d-89cd-0d373380e6e7");
+
     private static final int WARDEN_SPAWN_LEVEL_COST = 10;
     private static final int WARDEN_HP = 100;
     private static final int WARDEN_DMG = 8;
     private static final double WARDEN_SUMMON_COOLDOWN = 120;
-    private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
+    private static final double SONIC_BOOM_RANGE = 15;
+    private static final double SONIC_BOOM_RADIUS = 2;
+    private static final double SONIC_BOOM_COOLDOWN = 20;
 
+    private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 
     public EchoGlaiveItem() {
         super(ModToolMaterial.ECHO_SHARD, 1, 1.2f, new Settings()
@@ -96,32 +107,33 @@ public final class EchoGlaiveItem extends SwordItem {
             }
             return TypedActionResult.success(handStack);
         } else if (world.isClient()) {
-            SculkmansDecor.LOGGER.info("sonic boom in progress");
             final var client = MinecraftClient.getInstance();
             final var camera = client.getCameraEntity();
+            if (camera == null) return TypedActionResult.pass(handStack);
 
-            final var origin = camera.getPos();
-            final var vec3d2 = camera.getRotationVec(1).multiply(17);
-            final var end = origin.add(vec3d2);
-            final var box = camera.getBoundingBox().stretch(vec3d2).expand(1);
+            final var origin = camera.getEyePos();
+            final var dir = camera.getRotationVecClient();
+            final var dist = dir.multiply(SONIC_BOOM_RANGE);
+            final var end = origin.add(dist);
+            final var box = new Box(origin.subtract(SONIC_BOOM_RANGE, SONIC_BOOM_RANGE, SONIC_BOOM_RANGE),
+                    origin.add(SONIC_BOOM_RANGE, SONIC_BOOM_RANGE, SONIC_BOOM_RANGE));
+            final var entities = world.getEntitiesByClass(LivingEntity.class, box, e -> !e.isSpectator()
+                    && !e.isInvulnerableTo(user.getDamageSources().magic()) && e != user);
+            final var result = RaycastUtils.spherecast(entities, origin, end, SONIC_BOOM_RADIUS);
 
-            /// TODO: Spherecast function
-            final var result = ProjectileUtil.raycast(camera, origin, end, box, entityx -> !entityx.isSpectator() && entityx.canHit(), 17 * 17);
-            if (result == null) return TypedActionResult.pass(handStack);
+            final var target = result.entity();
 
-            final var type = result.getType();
-            SculkmansDecor.LOGGER.info("hit: " + result.toString());
-            if (type == HitResult.Type.ENTITY) {
-                final var target = result.getEntity();
-                if (!(target instanceof LivingEntity)) return TypedActionResult.pass(handStack);
-
-                SculkmansDecor.LOGGER.info("Sonic booming: " + target.toString());
-
-                final var bytes = PacketByteBufs.create();
-                bytes.writeInt(target.getId());
-                ClientPlayNetworking.send(SONIC_BOOM_PACKET_ID, bytes);
-                return TypedActionResult.success(handStack, true);
+            final var bytes = PacketByteBufs.create();
+            bytes.writeInt(target != null ? target.getId() : 0);
+            bytes.writeDouble(dist.getX());
+            bytes.writeDouble(dist.getY());
+            bytes.writeDouble(dist.getZ());
+            ClientPlayNetworking.send(SONIC_BOOM_PACKET_ID, bytes);
+            user.playSound(SoundEvents.ENTITY_WARDEN_SONIC_BOOM, SoundCategory.PLAYERS, 4.0f, 1.0f);
+            if (!user.getAbilities().creativeMode) {
+                user.getItemCooldownManager().set(this, (int) (20 * SONIC_BOOM_COOLDOWN));
             }
+            return TypedActionResult.success(handStack, true);
         }
         return TypedActionResult.pass(handStack);
     }

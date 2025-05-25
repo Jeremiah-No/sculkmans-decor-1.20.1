@@ -10,6 +10,7 @@ import net.jeremiah.sculkdecor.utils.SonicBoomUtils;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Vec3d;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,15 +32,19 @@ public class SculkmansDecor implements ModInitializer {
                 (server, player, handler,
                  buf, responseSender) -> {
                     var id = buf.readInt();
+                    var x = buf.readDouble();
+                    var y = buf.readDouble();
+                    var z = buf.readDouble();
 
                     var world = player.getEntityWorld();
                     var playerEntity = world.getPlayerByUuid(player.getGameProfile().getId());
-                    var target = (LivingEntity) world.getEntityById(id);
+                    var target = world.getEntityById(id);
 
                     server.execute(() -> {
                         assert playerEntity != null;
                         assert target != null;
-                        SonicBoomUtils.create((ServerWorld) world, playerEntity, target);
+                        SonicBoomUtils.create((ServerWorld) world, playerEntity,
+                                target != null ? (LivingEntity) target : null, new Vec3d(x, y, z));
                     });
                 });
     }
