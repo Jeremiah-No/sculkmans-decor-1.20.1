@@ -63,11 +63,22 @@ public final class EchoGlaiveItem extends SwordItem {
                     return TypedActionResult.fail(handStack);
                 }
                 var warden = warden_opt.get();
+
+                // Give Warden custom effects or attributes if needed
                 warden.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, -1, 3, false, false));
                 warden.getAttributes().setFrom(new AttributeContainer(DefaultAttributeContainer.builder()
                         .add(EntityAttributes.GENERIC_MAX_HEALTH, 100)
                         .build()));
                 ((WardenEntityExt) warden).sculkdecor$setSummoner(user.getGameProfile());
+
+                // Damage the player for 7.5 hearts (15 HP)
+                user.damage(user.getDamageSources().magic(), 15.0f);
+
+                // Apply negative effects to the player
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 300, 2)); // 10 sec
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 300, 2));
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, 300, 0));
+
                 if (!user.getAbilities().creativeMode) {
                     user.getItemCooldownManager().set(this, (int) (20 * WARDEN_SUMMON_COOLDOWN));
                 }
@@ -79,4 +90,5 @@ public final class EchoGlaiveItem extends SwordItem {
             return TypedActionResult.pass(handStack);
         }
     }
+
 }

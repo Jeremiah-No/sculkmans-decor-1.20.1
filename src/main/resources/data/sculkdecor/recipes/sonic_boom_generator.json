@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NSN",
+    "CEC",
+    "NCN"
+  ],
+  "key": {
+    "E": {
+      "item": "minecraft:echo_shard"
+    },
+    "S": {
+      "item": "minecraft:sculk_shrieker"
+    },
+    "N": {
+      "item": "minecraft:netherite_scrap"
+    },
+    "C": {
+      "item": "sculkdecor:chiseled_sculk_bone_bricks"
+    }
+  },
+  "result": {
+    "item": "sculkdecor:sonic_boom_generator",
+    "count": 1
+  }
+}

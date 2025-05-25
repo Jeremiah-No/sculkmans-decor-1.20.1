@@ -25,6 +25,7 @@ public class ModItemGroups {
                         entries.add((ModItems.ECHO_GLAIVE));
 
                         entries.add((Items.SCULK));
+                        entries.add((Items.ECHO_SHARD));
                         entries.add((Items.WARDEN_SPAWN_EGG));
                         entries.add((Items.SCULK_VEIN));
                         entries.add((Items.SCULK_CATALYST));
