@@ -21,8 +21,11 @@ public class SonicBoomUtils {
 
         world.playSound(origin.getX(), origin.getY(), origin.getZ(), SoundEvents.ENTITY_WARDEN_SONIC_BOOM,
                 SoundCategory.PLAYERS, 3.0f, 1.0f, true);
-        if (target == null) return;
-        target.damage(world.getDamageSources().magic(), 10.0f);
+        if (target != null) noParticles(world, attacker, target, dir);
+    }
+
+    public static void noParticles(ServerWorld world, LivingEntity attacker, LivingEntity target, Vec3d dir) {
+        target.damage(attacker.getDamageSources().magic(), 10.0f);
         final var knockres = 1 - target.getAttributeValue(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE);
         final double d = 0.5 * knockres;
         final double e = 2.5 * knockres;

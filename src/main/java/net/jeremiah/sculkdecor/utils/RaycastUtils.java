@@ -11,10 +11,11 @@ public class RaycastUtils {
         T closest = null;
         double closestDist = Double.POSITIVE_INFINITY;
         for (T entity : entities) {
-            var dist = linePointDist(origin, end, entity.getPos());
-            if (dist <= maxDist && dist <= closestDist) {
+            var line_dist = linePointDist(origin, end, entity.getPos());
+            var direct_dist = entity.getPos().subtract(origin).length();
+            if (line_dist <= maxDist && direct_dist <= closestDist) {
                 closest = entity;
-                closestDist = dist;
+                closestDist = direct_dist;
             }
         }
         return new RaycastResult<>(closest != null, closest);

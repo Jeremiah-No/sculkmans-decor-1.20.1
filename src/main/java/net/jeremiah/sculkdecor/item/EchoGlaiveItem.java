@@ -27,6 +27,7 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 public final class EchoGlaiveItem extends SwordItem {
@@ -38,9 +39,10 @@ public final class EchoGlaiveItem extends SwordItem {
     private static final int WARDEN_HP = 100;
     private static final int WARDEN_DMG = 8;
     private static final double WARDEN_SUMMON_COOLDOWN = 120;
-    private static final double SONIC_BOOM_RANGE = 15;
+    private static final double SONIC_BOOM_RANGE = 20;
     private static final double SONIC_BOOM_RADIUS = 2;
     private static final double SONIC_BOOM_COOLDOWN = 20;
+    private static final int SONIC_BOOM_CASTS = 10;
 
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 
@@ -85,6 +87,7 @@ public final class EchoGlaiveItem extends SwordItem {
                 attribs.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier("generic.attack_damage",
                         WARDEN_DMG - 30, EntityAttributeModifier.Operation.ADDITION));
                 warden.getAttributes().addTemporaryModifiers(attribs.build());
+                warden.setHealth(WARDEN_HP);
                 ((WardenEntityExt) warden).sculkdecor$setSummoner(user.getGameProfile());
 
                 if (user.experienceLevel < WARDEN_SPAWN_LEVEL_COST) {
@@ -112,17 +115,28 @@ public final class EchoGlaiveItem extends SwordItem {
             final var end = origin.add(dist);
             final var box = new Box(origin.subtract(SONIC_BOOM_RANGE, SONIC_BOOM_RANGE, SONIC_BOOM_RANGE),
                     origin.add(SONIC_BOOM_RANGE, SONIC_BOOM_RANGE, SONIC_BOOM_RANGE));
-            final var entities = world.getEntitiesByClass(LivingEntity.class, box, e -> !e.isSpectator()
-                    && !e.isInvulnerableTo(user.getDamageSources().magic()) && e != user);
-            final var result = RaycastUtils.spherecast(entities, origin, end, SONIC_BOOM_RADIUS);
 
-            final var target = result.entity();
+            final var allTargets = new ArrayList<LivingEntity>();
+
+            for (int i = 0; i < SONIC_BOOM_CASTS; i++) {
+                final var entities = world.getEntitiesByClass(LivingEntity.class, box, e -> !e.isSpectator()
+                        && !e.isInvulnerableTo(user.getDamageSources().magic())
+                        && e != user
+                        && !allTargets.contains(e));
+                final var result = RaycastUtils.spherecast(entities, origin, end, SONIC_BOOM_RADIUS);
+
+                final var target = result.entity();
+                if (result.hit()) allTargets.add(target);
+            }
 
             final var bytes = PacketByteBufs.create();
-            bytes.writeInt(target != null ? target.getId() : 0);
             bytes.writeDouble(dist.getX());
             bytes.writeDouble(dist.getY());
             bytes.writeDouble(dist.getZ());
+            bytes.writeInt(allTargets.size());
+            for (LivingEntity target : allTargets) {
+                bytes.writeInt(target.getId());
+            }
             ClientPlayNetworking.send(SONIC_BOOM_PACKET_ID, bytes);
             user.playSound(SoundEvents.ENTITY_WARDEN_SONIC_BOOM, SoundCategory.PLAYERS, 4.0f, 1.0f);
             if (!user.getAbilities().creativeMode) {

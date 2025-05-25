@@ -14,6 +14,8 @@ import net.minecraft.util.math.Vec3d;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+
 public class SculkmansDecor implements ModInitializer {
     public static final String MOD_ID = "sculkdecor";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
@@ -31,20 +33,25 @@ public class SculkmansDecor implements ModInitializer {
         ServerPlayNetworking.registerGlobalReceiver(EchoGlaiveItem.SONIC_BOOM_PACKET_ID,
                 (server, player, handler,
                  buf, responseSender) -> {
-                    var id = buf.readInt();
-                    var x = buf.readDouble();
-                    var y = buf.readDouble();
-                    var z = buf.readDouble();
+                    var dist = new Vec3d(buf.readDouble(), buf.readDouble(), buf.readDouble());
 
                     var world = player.getEntityWorld();
                     var playerEntity = world.getPlayerByUuid(player.getGameProfile().getId());
-                    var target = world.getEntityById(id);
+
+                    var targets = new ArrayList<LivingEntity>();
+
+                    var targetsCount = buf.readInt();
+                    for (int i = 0; i < targetsCount; i++) {
+                        targets.add((LivingEntity) world.getEntityById(buf.readInt()));
+                    }
 
                     server.execute(() -> {
                         assert playerEntity != null;
-                        assert target != null;
-                        SonicBoomUtils.create((ServerWorld) world, playerEntity,
-                                target != null ? (LivingEntity) target : null, new Vec3d(x, y, z));
+                        SonicBoomUtils.create((ServerWorld) world, playerEntity, null, dist);
+                        for (LivingEntity target : targets) {
+                            LOGGER.info("Booming: " + target.getId());
+                            SonicBoomUtils.noParticles((ServerWorld) world, playerEntity, target, dist.normalize());
+                        }
                     });
                 });
     }
