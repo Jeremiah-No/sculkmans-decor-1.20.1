@@ -13,6 +13,8 @@ public class ModBlocks {
             new Block(Block.Settings.copy(Blocks.BONE_BLOCK)));
     public static final Block CHISELED_SCULK_BONE_BRICKS = registerBlock("chiseled_sculk_bone_bricks",
             new Block(Block.Settings.copy(Blocks.BONE_BLOCK)));
+    public static final Block SONIC_BOOM_GENERATOR = registerBlock("sonic_boom_generator",
+            new Block(Block.Settings.copy(Blocks.BONE_BLOCK)));
 
     private static Block registerBlock(String name, Block block) {
         return Registry.register(Registries.BLOCK, SculkmansDecor.id(name), block);

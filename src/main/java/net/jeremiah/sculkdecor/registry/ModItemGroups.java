@@ -21,6 +21,7 @@ public class ModItemGroups {
                         entries.add((ModItems.SCULK_BONE_BLOCK));
                         entries.add((ModItems.SCULK_BONE_BLOCK_BRICKS));
                         entries.add((ModItems.CHISELED_SCULK_BONE_BRICKS));
+                        entries.add((ModItems.SONIC_BOOM_GENERATOR));
                         entries.add((ModItems.ECHO_GLAIVE));
 
                         entries.add((Items.SCULK));

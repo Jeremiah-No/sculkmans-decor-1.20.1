@@ -26,7 +26,7 @@ import java.util.UUID;
 public final class EchoGlaiveItem extends SwordItem {
     private static final UUID ATTACK_REACH_MODIFIER_ID = UUID.fromString("76a8dee3-3e7e-4e11-ba46-a19b0c724567");
     private static final UUID REACH_MODIFIER_ID = UUID.fromString("a31c8afc-a716-425d-89cd-0d373380e6e7");
-    private static final double WARDEN_SUMMON_COOLDOWN = 30;
+    private static final double WARDEN_SUMMON_COOLDOWN = 120;
 
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 

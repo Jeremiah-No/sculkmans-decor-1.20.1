@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+"sculkdecor:sculk_bone_block",
+"sculkdecor:sculk_bone_block_bricks",
+"sculkdecor:chiseled_sculk_bone_bricks",
+"sculkdecor:sonic_boom_generator"
+  ]
+}
