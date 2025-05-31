@@ -1,13 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "NSN",
-    "CEC",
-    "NCN"
+    "E E",
+    "CSC",
+    "NRN"
   ],
   "key": {
     "E": {
       "item": "minecraft:echo_shard"
+    },
+    "R": {
+      "item": "minecraft:reinforced_deepslate"
     },
     "S": {
       "item": "minecraft:sculk_shrieker"

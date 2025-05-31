@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "sculkdecor:sonic_boom_generator"
+    "sculkdecor:sonic_boom_generator",
+    "minecraft:reinforced_deepslate"
   ]
 }

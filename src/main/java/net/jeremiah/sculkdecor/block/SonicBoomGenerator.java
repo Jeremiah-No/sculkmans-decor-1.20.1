@@ -15,11 +15,16 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 public final class SonicBoomGenerator extends BlockWithEntity {
+    private final static VoxelShape SHAPE = VoxelShapes.cuboid(0, 0, 0, 1, 0.5, 1);
+
     public SonicBoomGenerator() {
-        super(Block.Settings.copy(Blocks.BONE_BLOCK));
+        super(Block.Settings.copy(Blocks.BONE_BLOCK).strength(100, 1200));
     }
 
     @Override
@@ -30,6 +35,12 @@ public final class SonicBoomGenerator extends BlockWithEntity {
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new SonicBoomGeneratorBlockEntity(pos, state);
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        return SHAPE;
     }
 
     @Override
