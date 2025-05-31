@@ -2,7 +2,6 @@ package net.jeremiah.sculkdecor.gui;
 
 import com.mojang.authlib.GameProfile;
 import net.jeremiah.sculkdecor.SculkmansDecor;
-import net.jeremiah.sculkdecor.entity.SonicBoomGeneratorBlockEntity;
 import net.jeremiah.sculkdecor.utils.PlayerUtils;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
