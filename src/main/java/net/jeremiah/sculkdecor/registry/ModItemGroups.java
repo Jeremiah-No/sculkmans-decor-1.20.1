@@ -34,9 +34,7 @@ public class ModItemGroups {
                         entries.add((Items.CALIBRATED_SCULK_SENSOR));
                     }).build());
 
-    public static void registerItemGroups() {
-        SculkmansDecor.LOGGER.info("Registering Item Groups for " + SculkmansDecor.MOD_ID);
-
+    public static void register() {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register((e) -> {
             e.add(ModItems.SCULK_BONE);
         });

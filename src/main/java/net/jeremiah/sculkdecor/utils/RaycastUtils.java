@@ -25,5 +25,6 @@ public class RaycastUtils {
         return b.subtract(a).crossProduct(a.subtract(p)).length() / b.subtract(a).length();
     }
 
-    public record RaycastResult<T extends Entity>(boolean hit, @Nullable("hit=false") T entity) {}
+    public record RaycastResult<T extends Entity>(boolean hit, @Nullable("hit=false") T entity) {
+    }
 }

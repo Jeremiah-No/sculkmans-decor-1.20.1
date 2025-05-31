@@ -5,7 +5,8 @@
   "mixins": [
     "PlayerEntityMixin",
     "StatusEffectUtilsMixin",
-    "WardenEntityMixin"
+    "WardenEntityMixin",
+    "YggdrasilAuthenticationServiceAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

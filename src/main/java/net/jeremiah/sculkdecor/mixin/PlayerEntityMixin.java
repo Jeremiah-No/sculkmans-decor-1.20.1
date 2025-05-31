@@ -28,11 +28,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends Entity {
-    @Shadow public abstract GameProfile getGameProfile();
-
     private PlayerEntityMixin(EntityType<?> type, World world) {
         super(type, world);
     }
+
+    @Shadow
+    public abstract GameProfile getGameProfile();
 
     @Inject(method = "interact", at = @At("HEAD"), cancellable = true)
     private void sculkdecor$interactWarden(Entity entity, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
@@ -65,7 +66,7 @@ public abstract class PlayerEntityMixin extends Entity {
                 this.getPos().add(new Vec3d(50, 10, 50))
         ), e -> true);
         for (WardenEntity e : entities) {
-            var ext = (WardenEntityExt)e;
+            var ext = (WardenEntityExt) e;
             var owner = ext.sculkdecor$getSummoner();
             if (!this.getGameProfile().equals(owner)) continue;
             e.increaseAngerAt(target, 100, false);
