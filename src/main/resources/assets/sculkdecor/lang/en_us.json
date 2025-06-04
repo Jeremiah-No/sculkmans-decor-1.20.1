@@ -1,13 +1,21 @@
 {
   "itemgroup.sculk_items": "Sculk Items",
+
   "item.sculkdecor.sculk_bone": "Sculk Bone",
   "item.sculkdecor.echo_glaive": "Echo Glaive",
+
   "block.sculkdecor.sculk_bone_block": "Sculk Bone Block",
   "block.sculkdecor.sonic_boom_generator": "Sonic Boom Generator",
-  "block.sculkdecor.sonic_boom_generator.not_owned": "Block not owned!",
-  "block.sculkdecor.sonic_boom_generator.not_owned_insist": "Block not owned you moron, stop cheating. Kill yourself!",
   "block.sculkdecor.sculk_bone_block_bricks": "Sculk Bone Bricks",
   "block.sculkdecor.chiseled_sculk_bone_bricks": "Chiseled Sculk Bone Bricks",
+
+  "block.sculkdecor.sculk_bone_block_wall": "Sculk Bone Block Wall",
+  "block.sculkdecor.sculk_bone_block_slab": "Sculk Bone Block Slab",
+  "block.sculkdecor.sculk_bone_block_stairs": "Sculk Bone Block Stairs",
+
+  "block.sculkdecor.sonic_boom_generator.not_owned": "Block not owned!",
+  "block.sculkdecor.sonic_boom_generator.not_owned_insist": "Block not owned you moron, stop cheating. Kill yourself!",
+
   "gui.sculkdecor.sonic_boom_generator": "Sonic Boom Generator",
   "gui.sculkdecor.sonic_boom_generator.add_button": "Add player",
   "gui.sculkdecor.sonic_boom_generator.add_button.tooltip": "Adds a player to the exception list",
