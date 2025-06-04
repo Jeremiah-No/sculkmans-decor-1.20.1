@@ -17,19 +17,22 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.jeremiah.sculkdecor.SculkmansDecor"
+      "net.jeremiah.sculkdecor.SculkmansDecor",
+      "zetaclix.eplayers.EliminatedPlayers"
     ],
     "client": [
       "net.jeremiah.sculkdecor.SculkmansDecorClient"
     ]
   },
   "mixins": [
-    "sculkdecor.mixins.json"
+    "sculkdecor.mixins.json",
+    "eplayers.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.16.14",
     "minecraft": "~1.20.1",
     "java": ">=17",
-    "fabric-api": "*"
+    "fabric-api": "*",
+    "owo-lib": "${owo_version}"
   }
 }

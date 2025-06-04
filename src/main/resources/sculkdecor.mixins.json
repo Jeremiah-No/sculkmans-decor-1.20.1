@@ -8,12 +8,12 @@
     "WardenEntityMixin",
     "YggdrasilAuthenticationServiceAccessor"
   ],
-  "injectors": {
-    "defaultRequire": 1
-  },
   "client": [
     "client.ItemRendererAccessor",
     "client.ItemRendererMixin",
     "client.ModelLoaderMixin"
-  ]
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
 }

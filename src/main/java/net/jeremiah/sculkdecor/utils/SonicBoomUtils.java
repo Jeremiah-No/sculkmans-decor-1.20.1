@@ -29,7 +29,7 @@ public class SonicBoomUtils {
     public static void noParticles(LivingEntity attacker, @NotNull LivingEntity target, Vec3d dir) {
         target.damage(attacker.getDamageSources().magic(), 10.0f);
         final var knockres = 1 - target.getAttributeValue(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE);
-        final double d = 0.5 * knockres;
+        final double d = 2.5 * knockres;
         final double e = 2.5 * knockres;
         target.addVelocity(dir.getX() * e, dir.getY() * d, dir.getZ() * e);
     }
@@ -47,7 +47,7 @@ public class SonicBoomUtils {
         if (target == null) return;
         target.damage(world.getDamageSources().magic(), 10.0f);
         final var knockres = 1 - target.getAttributeValue(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE);
-        final double d = 0.5 * knockres;
+        final double d = 2.5 * knockres;
         final double e = 2.5 * knockres;
         target.addVelocity(dir.getX() * e, dir.getY() * d, dir.getZ() * e);
     }

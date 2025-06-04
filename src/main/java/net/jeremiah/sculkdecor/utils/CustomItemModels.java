@@ -1,6 +1,8 @@
 package net.jeremiah.sculkdecor.utils;
 
 import com.google.common.collect.ImmutableMap;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
@@ -9,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
+@Environment(EnvType.CLIENT)
 public class CustomItemModels {
     private static final Map<Item, ModelIdentifier> itemModels = new HashMap<>();
 
