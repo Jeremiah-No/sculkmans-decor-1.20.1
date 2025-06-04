@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "sculkdecor:sculk_bone_block_wall",
+    "minecraft:reinforced_deepslate"
+  ]
+}

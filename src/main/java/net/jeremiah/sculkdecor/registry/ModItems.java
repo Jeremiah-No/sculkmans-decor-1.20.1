@@ -11,6 +11,9 @@ import net.minecraft.registry.Registry;
 public class ModItems {
     public static final Item SCULK_BONE = registerItem("sculk_bone", new Item(new Item.Settings()));
     public static final Item SCULK_BONE_BLOCK = registerItem("sculk_bone_block", ModBlocks.SCULK_BONE_BLOCK);
+    public static final Item SCULK_BONE_BLOCK_SLAB = registerItem("sculk_bone_block_slab", ModBlocks.SCULK_BONE_BLOCK_SLAB);
+    public static final Item SCULK_BONE_BLOCK_STAIRS = registerItem("sculk_bone_block_stairs", ModBlocks.SCULK_BONE_BLOCK_STAIRS);
+    public static final Item SCULK_BONE_BLOCK_WALL = registerItem("sculk_bone_block_wall", ModBlocks.SCULK_BONE_BLOCK_WALL);
     public static final Item SONIC_BOOM_GENERATOR = registerItem("sonic_boom_generator", ModBlocks.SONIC_BOOM_GENERATOR);
     public static final Item SCULK_BONE_BLOCK_BRICKS = registerItem("sculk_bone_block_bricks", ModBlocks.SCULK_BONE_BLOCK_BRICKS);
     public static final Item CHISELED_SCULK_BONE_BRICKS = registerItem("chiseled_sculk_bone_bricks", ModBlocks.CHISELED_SCULK_BONE_BRICKS);

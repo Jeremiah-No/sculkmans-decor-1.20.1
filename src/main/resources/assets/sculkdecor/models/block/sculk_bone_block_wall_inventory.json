@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "sculkdecor:block/sculk_bone_block"
+  }
+}
