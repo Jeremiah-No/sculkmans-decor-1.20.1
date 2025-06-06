@@ -5,7 +5,6 @@ plugins {
 
 version = project.mod_version
 group = project.maven_group
-owo_version = project.owo_version
 
 base {
 	archivesName = project.archives_base_name
@@ -18,7 +17,6 @@ repositories {
 			includeGroup "com.jamieswhiteshirt"
 		}
 	}
-	maven { url = 'https://maven.wispforest.io/releases/' }
 }
 
 dependencies {
@@ -30,18 +28,14 @@ dependencies {
 	// Mod dependencies
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	annotationProcessor modImplementation("io.wispforest:owo-lib:${project.owo_version}")
 	include modImplementation("com.jamieswhiteshirt:reach-entity-attributes:2.4.0")
-	include "io.wispforest:owo-sentinel:${project.owo_version}"
 }
 
 processResources {
 	inputs.property "version", project.version
-	inputs.property "owo_version", project.owo_version
 
 	filesMatching("fabric.mod.json") {
-		expand "version": inputs.properties.version,
-				"owo_version": inputs.properties.owo_version
+		expand "version": inputs.properties.version
 	}
 }
 
@@ -85,6 +79,3 @@ publishing {
 
 	}
 }
-
-sourceSets.main.java.srcDirs += [ 'src/main/generatedJava' ]
-compileJava.options.generatedSourceOutputDirectory = file("${projectDir}/src/main/generatedJava/zetaclix/eplayers/")
