@@ -19,6 +19,7 @@ public class ModItemGroups {
                     .entries((displayContext, entries) -> {
                         entries.add((ModItems.SCULK_BONE));
                         entries.add((ModItems.SCULK_BONE_BLOCK));
+                        entries.add((ModItems.SMOOTH_SCULK_BONE_BLOCK));
                         entries.add((ModItems.SCULK_BONE_BLOCK_STAIRS));
                         entries.add((ModItems.SCULK_BONE_BLOCK_WALL));
                         entries.add((ModItems.SCULK_BONE_BLOCK_SLAB));
