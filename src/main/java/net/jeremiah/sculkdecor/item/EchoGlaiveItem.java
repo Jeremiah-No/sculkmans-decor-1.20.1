@@ -125,7 +125,7 @@ public final class EchoGlaiveItem extends SwordItem {
                         && !allTargets.contains(e));
                 final var result = RaycastUtils.spherecast(entities, origin, end, SONIC_BOOM_RADIUS);
 
-                final var target = result.entity();
+                final var target = result.result();
                 if (result.hit()) allTargets.add(target);
             }
 

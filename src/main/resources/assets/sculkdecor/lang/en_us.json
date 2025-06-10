@@ -3,6 +3,7 @@
 
   "item.sculkdecor.sculk_bone": "Sculk Bone",
   "item.sculkdecor.echo_glaive": "Echo Glaive",
+  "item.sculkdecor.xp_capacitor": "XP Capacitor",
 
   "block.sculkdecor.sculk_bone_block": "Sculk Bone Block",
   "block.sculkdecor.smooth_sculk_bone_block": "Smooth Sculk Bone",
@@ -12,6 +13,7 @@
   "block.sculkdecor.sculk_bone_block_wall": "Sculk Bone Block Wall",
   "block.sculkdecor.sculk_bone_block_slab": "Sculk Bone Block Slab",
   "block.sculkdecor.sculk_bone_block_stairs": "Sculk Bone Block Stairs",
+  "block.sculkdecor.xp_bank": "XP Bank",
 
   "block.sculkdecor.sonic_boom_generator.not_owned": "Block not owned!",
   "block.sculkdecor.sonic_boom_generator.not_owned_insist": "Block not owned you moron, stop cheating. Kill yourself!",

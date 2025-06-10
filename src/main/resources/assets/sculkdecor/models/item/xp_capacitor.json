@@ -1,0 +1,18 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "sculkdecor:item/xp_capacitor/level0"
+  },
+  "overrides": [
+    { "predicate": { "custom_model_data": 1 }, "model": "sculkdecor:item/xp_capacitor/level1" },
+    { "predicate": { "custom_model_data": 2 }, "model": "sculkdecor:item/xp_capacitor/level2" },
+    { "predicate": { "custom_model_data": 3 }, "model": "sculkdecor:item/xp_capacitor/level3" },
+    { "predicate": { "custom_model_data": 4 }, "model": "sculkdecor:item/xp_capacitor/level4" },
+    { "predicate": { "custom_model_data": 5 }, "model": "sculkdecor:item/xp_capacitor/level5" },
+    { "predicate": { "custom_model_data": 6 }, "model": "sculkdecor:item/xp_capacitor/level6" },
+    { "predicate": { "custom_model_data": 7 }, "model": "sculkdecor:item/xp_capacitor/level7" },
+    { "predicate": { "custom_model_data": 8 }, "model": "sculkdecor:item/xp_capacitor/level8" },
+    { "predicate": { "custom_model_data": 9 }, "model": "sculkdecor:item/xp_capacitor/level9" },
+    { "predicate": { "custom_model_data": 10 }, "model": "sculkdecor:item/xp_capacitor/level10" }
+  ]
+}

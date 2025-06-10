@@ -14,7 +14,7 @@ public class RaycastUtils {
         T closest = null;
         double closestDist = Double.POSITIVE_INFINITY;
         for (T entity : entities) {
-            var line_dist = linePointDist(origin, end, entity.getPos());
+            var line_dist = segmentPointDist(origin, end, entity.getPos());
             var direct_dist = entity.getPos().subtract(origin).length();
             if (line_dist <= maxDist && direct_dist <= closestDist) {
                 closest = entity;
@@ -24,7 +24,7 @@ public class RaycastUtils {
         return new RaycastResult<>(closest != null, closest);
     }
 
-    private static double linePointDist(Vec3d a, Vec3d b, Vec3d c) {
+    private static double segmentPointDist(Vec3d a, Vec3d b, Vec3d c) {
         final var ab = b.subtract(a);
         final var ac = c.subtract(a);
 
@@ -33,6 +33,5 @@ public class RaycastUtils {
         return c.distanceTo(projection);
     }
 
-    public record RaycastResult<T extends Entity>(boolean hit, @Nullable("hit=false") T entity) {
-    }
+    public record RaycastResult<T>(boolean hit, @Nullable("hit=false") T result) {}
 }

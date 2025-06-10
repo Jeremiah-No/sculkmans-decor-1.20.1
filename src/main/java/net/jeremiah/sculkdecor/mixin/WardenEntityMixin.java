@@ -20,7 +20,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-// TODO: Make all owned wardens attack a target when the summoner attack an entity (exclude other wardens)
 @Mixin(WardenEntity.class)
 public abstract class WardenEntityMixin extends Entity implements WardenEntityExt {
     @Unique

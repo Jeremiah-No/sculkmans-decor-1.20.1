@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "SGS",
+    " S "
+  ],
+  "key": {
+    "C": { "item": "minecraft:sculk_catalyst" },
+    "G": { "item": "minecraft:glass" },
+    "S": { "item": "minecraft:sculk" }
+  },
+  "result": {
+    "item": "sculkdecor:xp_capacitor"
+  }
+}

@@ -9,7 +9,9 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -19,7 +21,9 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
+@SuppressWarnings("deprecation")
 public final class SonicBoomGenerator extends BlockWithEntity {
     private final static VoxelShape SHAPE = VoxelShapes.cuboid(0, 0, 0, 1, 0.5, 1);
 
@@ -44,13 +48,23 @@ public final class SonicBoomGenerator extends BlockWithEntity {
     }
 
     @Override
+    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        if (!world.isClient() && placer instanceof PlayerEntity plr) {
+            final var be = ((SonicBoomGeneratorBlockEntity)world.getBlockEntity(pos));
+            assert be != null;
+            be.setOwner(plr.getGameProfile());
+            world.markDirty(pos);
+            world.updateListeners(pos, state, state, 0);
+        }
+    }
+
+    @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         return (world1, pos, state1, blockEntity) -> ((SonicBoomGeneratorBlockEntity) blockEntity)
                 .tick(world, pos, state1);
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         final var blk = ((SonicBoomGeneratorBlockEntity) world.getBlockEntity(pos));
         assert blk != null;
@@ -62,11 +76,6 @@ public final class SonicBoomGenerator extends BlockWithEntity {
         }
         if (world.isClient()) {
             setClientScreen(pos);
-        } else if (blk.getOwner() == null) {
-            final var gp = player.getGameProfile();
-            blk.setOwner(gp);
-            world.markDirty(pos);
-            world.updateListeners(pos, state, state, 0);
         }
 
         return ActionResult.SUCCESS;
