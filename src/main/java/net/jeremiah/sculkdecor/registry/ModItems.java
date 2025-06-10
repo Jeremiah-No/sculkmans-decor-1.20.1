@@ -11,6 +11,7 @@ import net.minecraft.registry.Registry;
 public class ModItems {
     public static final Item SCULK_BONE = registerItem("sculk_bone", new Item(new Item.Settings()));
     public static final Item SCULK_BONE_BLOCK = registerItem("sculk_bone_block", ModBlocks.SCULK_BONE_BLOCK);
+    public static final Item SCULKSHROOM = registerItem("sculkshroom", ModBlocks.SCULKSHROOM);
     public static final Item SMOOTH_SCULK_BONE_BLOCK = registerItem("smooth_sculk_bone_block", ModBlocks.SMOOTH_SCULK_BONE_BLOCK);
     public static final Item SCULK_BONE_BLOCK_SLAB = registerItem("sculk_bone_block_slab", ModBlocks.SCULK_BONE_BLOCK_SLAB);
     public static final Item SCULK_BONE_BLOCK_STAIRS = registerItem("sculk_bone_block_stairs", ModBlocks.SCULK_BONE_BLOCK_STAIRS);
