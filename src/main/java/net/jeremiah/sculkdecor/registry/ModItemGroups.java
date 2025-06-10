@@ -3,7 +3,6 @@ package net.jeremiah.sculkdecor.registry;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.jeremiah.sculkdecor.SculkmansDecor;
-import net.jeremiah.sculkdecor.item.XPCapacitorItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.ItemStack;
@@ -30,6 +29,7 @@ public class ModItemGroups {
                         entries.add(ModItems.ECHO_GLAIVE);
                         entries.add(ModItems.XP_CAPACITOR);
                         entries.add(((XPCapacitorItem)ModItems.XP_CAPACITOR).stackWithCapacity(-1));
+                        entries.add(ModItems.SCULKSHROOM);
 
                         entries.add(Items.SCULK);
                         entries.add(Items.ECHO_SHARD);

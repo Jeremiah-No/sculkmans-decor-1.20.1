@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    " B ",
+    "   "
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:sculk"
+    },
+    "B": {
+      "item": "minecraft:brown_mushroom"
+    }
+  },
+  "result": {
+    "item": "sculkdecor:sculkshroom",
+    "count": 1
+  }
+}
