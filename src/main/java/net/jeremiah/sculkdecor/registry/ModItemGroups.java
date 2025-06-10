@@ -3,6 +3,7 @@ package net.jeremiah.sculkdecor.registry;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.jeremiah.sculkdecor.SculkmansDecor;
+import net.jeremiah.sculkdecor.item.XPCapacitorItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.ItemStack;
