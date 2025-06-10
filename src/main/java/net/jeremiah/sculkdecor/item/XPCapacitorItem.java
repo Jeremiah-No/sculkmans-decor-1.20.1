@@ -57,7 +57,7 @@ public final class XPCapacitorItem extends Item {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         var stack = user.getStackInHand(hand);
 
-        final var nbt = stack.getNbt();
+        final var nbt = stack.getOrCreateNbt();
         assert nbt != null;
 
         var levels = nbt.getInt(NBT_STORED_XP_KEY);
