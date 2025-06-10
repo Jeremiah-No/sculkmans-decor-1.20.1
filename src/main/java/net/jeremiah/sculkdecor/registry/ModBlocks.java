@@ -7,12 +7,15 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.WorldView;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 
 public class ModBlocks {
     private static final Block.Settings BONE_BLOCK_SETTINGS = Block.Settings.copy(Blocks.BONE_BLOCK);
-    private static final Block.Settings BROWN_MUSHROOM_BLOCK_SETTINGS = Block.Settings.copy(Blocks.BROWN_MUSHROOM);
+    private static final Block.Settings BROWN_MUSHROOM_SETTINGS = Block.Settings.copy(Blocks.BROWN_MUSHROOM);
 
 
     public static final RegistryKey<ConfiguredFeature<?, ?>> HUGE_BROWN_MUSHROOM_KEY = RegistryKey.of(
@@ -39,14 +42,19 @@ public class ModBlocks {
     public static final Block SCULK_BONE_BLOCK_WALL = registerBlock("sculk_bone_block_wall",
             new WallBlock(BONE_BLOCK_SETTINGS));
 
-    public static final Block SCULKSHROOM = Registry.register(
-            Registries.BLOCK,
-            new Identifier(SculkmansDecor.MOD_ID, "sculkshroom"),
-            new MushroomPlantBlock(
-                    Block.Settings.copy(Blocks.BROWN_MUSHROOM),
-                    HUGE_BROWN_MUSHROOM_KEY
-            )
-    );
+    public static final Block SCULKSHROOM = registerBlock("sculkshroom", new MushroomPlantBlock(
+            BROWN_MUSHROOM_SETTINGS
+                    .mapColor(MapColor.LAPIS_BLUE),
+            null
+    ) {
+        @Override
+        public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+            BlockPos blockPos = pos.down();
+            BlockState blockState = world.getBlockState(blockPos);
+            return blockState.isOf(Blocks.SCULK) ||
+                    world.getBaseLightLevel(pos, 0) < 13 && this.canPlantOnTop(blockState, world, blockPos);
+        }
+    });
 
     private static Block registerBlock(String name, Block block) {
         return Registry.register(Registries.BLOCK, SculkmansDecor.id(name), block);
