@@ -28,6 +28,7 @@ import net.minecraft.world.World;
 import java.util.HashSet;
 import java.util.Set;
 
+@SuppressWarnings("unused")
 public final class SonicBoomGeneratorBlockEntity extends BlockEntity {
     public static final Identifier NETWORK_CHANNEL = SculkmansDecor.id("sonic_boom_generator");
 

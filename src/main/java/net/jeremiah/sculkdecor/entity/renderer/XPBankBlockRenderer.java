@@ -11,6 +11,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.RotationAxis;
 import org.joml.Matrix4f;
 
+@SuppressWarnings("unused")
 public final class XPBankBlockRenderer implements BlockEntityRenderer<XPBankBlockEntity> {
     public XPBankBlockRenderer(BlockEntityRendererFactory.Context ctx) {}
 

@@ -13,6 +13,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
+@SuppressWarnings("unused")
 public class ModItemGroups {
     public static final ItemGroup SCULK_ITEMS_GROUP = Registry.register(Registries.ITEM_GROUP, new Identifier(SculkmansDecor.MOD_ID, "sculk_items"),
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.sculk_items"))
