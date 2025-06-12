@@ -1,14 +1,12 @@
 package net.jeremiah.sculkdecor.block;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.jeremiah.sculkdecor.entity.SonicBoomGeneratorBlockEntity;
 import net.jeremiah.sculkdecor.gui.SonicBoomScreen;
+import net.jeremiah.sculkdecor.utils.GuiUtils;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -42,7 +40,6 @@ public final class SonicBoomGenerator extends BlockWithEntity {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPE;
     }
@@ -54,7 +51,6 @@ public final class SonicBoomGenerator extends BlockWithEntity {
             assert be != null;
             be.setOwner(plr.getGameProfile());
             world.markDirty(pos);
-            world.updateListeners(pos, state, state, 0);
         }
     }
 
@@ -72,18 +68,20 @@ public final class SonicBoomGenerator extends BlockWithEntity {
             if (world.isClient()) {
                 player.sendMessage(Text.translatable("block.sculkdecor.sonic_boom_generator.not_owned"));
             }
-            return ActionResult.SUCCESS;
+            return ActionResult.FAIL;
         }
         if (world.isClient()) {
-            setClientScreen(pos);
+            GuiUtils.setClientScreen(SonicBoomScreen.class, pos.toImmutable());
         }
 
         return ActionResult.SUCCESS;
     }
 
-    @Environment(EnvType.CLIENT)
-    private void setClientScreen(BlockPos pos) {
-        final var client = MinecraftClient.getInstance();
-        client.setScreen(new SonicBoomScreen(pos));
+    @Override
+    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+        if (!newState.isOf(state.getBlock())) {
+            GuiUtils.resetClientScreen();
+        }
+        super.onStateReplaced(state, world, pos, newState, moved);
     }
 }

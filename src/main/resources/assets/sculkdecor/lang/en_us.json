@@ -19,7 +19,6 @@
   "block.sculkdecor.sonic_boom_generator.not_owned": "Block not owned!",
   "block.sculkdecor.sonic_boom_generator.not_owned_insist": "Block not owned you moron, stop cheating. Kill yourself!",
 
-  "gui.sculkdecor.sonic_boom_generator": "Sonic Boom Generator",
   "gui.sculkdecor.sonic_boom_generator.add_button": "Add player",
   "gui.sculkdecor.sonic_boom_generator.add_button.tooltip": "Adds a player to the exception list",
   "gui.sculkdecor.sonic_boom_generator.add_button.failed_add": "Failed to add %s to ignored players"

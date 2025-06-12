@@ -1,22 +1,22 @@
 package net.jeremiah.sculkdecor.item;
 
-import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
 public final class XPCapacitorItem extends Item {
-    private static final String NBT_STORED_XP_KEY = "StoredLevels";
+    public static final String NBT_STORED_XP_KEY = "StoredLevels";
     private static final int MAX_LEVEL_CAPACITY = 10;
 
     public XPCapacitorItem() {
-        super(new Settings().rarity(Rarity.UNCOMMON));
+        super(new Settings()
+                .rarity(Rarity.UNCOMMON)
+                .maxCount(1));
     }
 
     @Override
@@ -76,15 +76,5 @@ public final class XPCapacitorItem extends Item {
             stack.setNbt(nbt);
         }
         return TypedActionResult.consume(stack);
-    }
-
-    static {
-        ModelPredicateProviderRegistry.registerCustomModelData((stack, client,
-                                                                entity, seed) -> {
-            var nbt = stack.getNbt();
-            if (nbt == null) return 0;
-            if (!nbt.contains(NBT_STORED_XP_KEY, NbtElement.INT_TYPE)) return 0;
-            return nbt.getInt(NBT_STORED_XP_KEY);
-        });
     }
 }

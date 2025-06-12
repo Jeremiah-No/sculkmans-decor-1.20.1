@@ -31,6 +31,7 @@ public class ModItemGroups {
                         entries.add(ModItems.XP_CAPACITOR);
                         entries.add(((XPCapacitorItem)ModItems.XP_CAPACITOR).stackWithCapacity(-1));
                         entries.add(ModItems.SCULKSHROOM);
+                        entries.add(ModItems.XP_BANK);
 
                         entries.add(Items.SCULK);
                         entries.add(Items.ECHO_SHARD);

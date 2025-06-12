@@ -2,25 +2,16 @@ package net.jeremiah.sculkdecor.registry;
 
 import net.jeremiah.sculkdecor.SculkmansDecor;
 import net.jeremiah.sculkdecor.block.SonicBoomGenerator;
+import net.jeremiah.sculkdecor.block.XPBank;
 import net.minecraft.block.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldView;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
 
 public class ModBlocks {
     private static final Block.Settings BONE_BLOCK_SETTINGS = Block.Settings.copy(Blocks.BONE_BLOCK);
     private static final Block.Settings BROWN_MUSHROOM_SETTINGS = Block.Settings.copy(Blocks.BROWN_MUSHROOM);
-
-
-    public static final RegistryKey<ConfiguredFeature<?, ?>> HUGE_BROWN_MUSHROOM_KEY = RegistryKey.of(
-            RegistryKeys.CONFIGURED_FEATURE,
-            new Identifier("minecraft", "huge_brown_mushroom")
-    );
 
     public static final Block SCULK_BONE_BLOCK = registerBlock("sculk_bone_block",
             new Block(BONE_BLOCK_SETTINGS));
@@ -33,6 +24,8 @@ public class ModBlocks {
             new Block(BONE_BLOCK_SETTINGS));
     public static final Block SONIC_BOOM_GENERATOR = registerBlock("sonic_boom_generator",
             new SonicBoomGenerator());
+    public static final Block XP_BANK = registerBlock("xp_bank",
+            new XPBank());
 
     public static final Block SCULK_BONE_BLOCK_STAIRS = registerBlock("sculk_bone_block_stairs",
             new StairsBlock(SCULK_BONE_BLOCK.getDefaultState(), BONE_BLOCK_SETTINGS));
@@ -51,7 +44,7 @@ public class ModBlocks {
             BlockPos blockPos = pos.down();
             BlockState blockState = world.getBlockState(blockPos);
             return blockState.isOf(Blocks.SCULK) ||
-                    world.getBaseLightLevel(pos, 0) < 13 && this.canPlantOnTop(blockState, world, blockPos);
+                    (world.getBaseLightLevel(pos, 0) < 13 && this.canPlantOnTop(blockState, world, blockPos));
         }
     });
 

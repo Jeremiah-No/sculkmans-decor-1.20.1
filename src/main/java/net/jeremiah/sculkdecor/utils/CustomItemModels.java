@@ -15,8 +15,8 @@ import java.util.Map;
 public class CustomItemModels {
     private static final Map<Item, ModelIdentifier> itemModels = new HashMap<>();
 
-    public static void registerItemModel(@NotNull Item item, @NotNull Identifier id, @NotNull String variant) {
-        itemModels.put(item, new ModelIdentifier(id, variant));
+    public static void registerItemModel(@NotNull Item item, @NotNull Identifier id) {
+        itemModels.put(item, new ModelIdentifier(id, "inventory"));
     }
 
     public static ImmutableMap<Item, ModelIdentifier> getItemModels() {

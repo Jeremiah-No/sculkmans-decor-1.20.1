@@ -1,6 +1,6 @@
 {
 	"credit": "Made with Blockbench",
-	"parent": "block/cube_all",
+	"parent": "minecraft:block/cube_all",
 	"texture_size": [64, 64],
 	"textures": {
 		"1": "sculkdecor:block/sculk_bone_block",

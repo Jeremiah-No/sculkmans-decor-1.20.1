@@ -22,6 +22,7 @@ public class ModItems {
     public static final Item CHISELED_SCULK_BONE_BRICKS = registerItem("chiseled_sculk_bone_bricks", ModBlocks.CHISELED_SCULK_BONE_BRICKS);
     public static final Item ECHO_GLAIVE = registerItem("echo_glaive", new EchoGlaiveItem());
     public static final Item XP_CAPACITOR = registerItem("xp_capacitor", new XPCapacitorItem());
+    public static final Item XP_BANK = registerItem("xp_bank", ModBlocks.XP_BANK);
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, SculkmansDecor.id(name), item);

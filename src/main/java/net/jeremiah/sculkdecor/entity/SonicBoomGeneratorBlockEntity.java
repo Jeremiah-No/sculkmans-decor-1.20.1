@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.jeremiah.sculkdecor.SculkmansDecor;
 import net.jeremiah.sculkdecor.registry.ModBlockEntityTypes;
 import net.jeremiah.sculkdecor.utils.SonicBoomUtils;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -39,6 +40,13 @@ public final class SonicBoomGeneratorBlockEntity extends BlockEntity {
 
     public SonicBoomGeneratorBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntityTypes.SONIC_BOOM_GENERATOR, pos, state);
+    }
+
+    @Override
+    public void markDirty() {
+        assert world != null;
+        world.updateListeners(pos, getCachedState(),  getCachedState(), Block.NOTIFY_ALL);
+        super.markDirty();
     }
 
     @Override
@@ -95,14 +103,12 @@ public final class SonicBoomGeneratorBlockEntity extends BlockEntity {
         ignored.add(plr);
         markDirty();
         assert world != null;
-        world.updateListeners(pos, getCachedState(), getCachedState(), 0);
     }
 
     public void removeIgnoredPlayer(GameProfile plr) {
         ignored.remove(plr);
         markDirty();
         assert world != null;
-        world.updateListeners(pos, getCachedState(), getCachedState(), 0);
     }
 
     public boolean canInteract(GameProfile gp) {

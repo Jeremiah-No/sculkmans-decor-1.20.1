@@ -3,7 +3,6 @@ package net.jeremiah.sculkdecor.gui;
 import com.mojang.authlib.GameProfile;
 import net.jeremiah.sculkdecor.SculkmansDecor;
 import net.jeremiah.sculkdecor.entity.SonicBoomGeneratorBlockEntity;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.PlayerSkinDrawer;
 import net.minecraft.client.gui.screen.Screen;
@@ -20,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class SonicBoomScreen extends Screen {
-    private static final Text TITLE = Text.translatable("gui.sculkdecor.sonic_boom_generator");
+    private static final Text TITLE = Text.translatable("block.sculkdecor.sonic_boom_generator");
     private static final Identifier BACKGROUND = SculkmansDecor.id("textures/gui/sonic_boom_gen.png");
 
     private static final int GUI_WIDTH = 236;
@@ -28,7 +27,7 @@ public final class SonicBoomScreen extends Screen {
     private static final int FOOTER_SIZE = 32;
     private static final int UNIT_SIZE = 18;
     private static final int CELL_HEIGHT = 36;
-    private static final int SCROLL_MULTIPLER = UNIT_SIZE / 3;
+    private static final int SCROLL_MULTIPLIER = UNIT_SIZE / 3;
 
     private final List<GameProfile> players = new ArrayList<>();
     private final BlockPos pos;
@@ -45,13 +44,16 @@ public final class SonicBoomScreen extends Screen {
     public SonicBoomScreen(BlockPos pos) {
         super(TITLE);
         this.pos = pos;
-        this.client = MinecraftClient.getInstance();
     }
 
     @Override
     protected void init() {
         assert client != null && client.world != null;
         this.entity = (SonicBoomGeneratorBlockEntity) client.world.getBlockEntity(pos);
+        if (entity == null) {
+            close();
+            return;
+        }
 
         int minUnits = MathHelper.ceil((float) (CELL_HEIGHT + 4) / (float) UNIT_SIZE);
         guiLeft = (width - GUI_WIDTH) / 2 + 2;
@@ -72,7 +74,7 @@ public final class SonicBoomScreen extends Screen {
         players.addAll(entity.getIgnoredPlayers());
         skinProvider = client.getSkinProvider();
 
-        maxScroll = Math.max(0, players.size() - units) * (UNIT_SIZE / SCROLL_MULTIPLER);
+        maxScroll = Math.max(0, players.size() - units) * (UNIT_SIZE / SCROLL_MULTIPLIER);
     }
 
     private void addPlayer(ButtonWidget btn) {
@@ -85,7 +87,7 @@ public final class SonicBoomScreen extends Screen {
         players.clear();
         players.addAll(entity.getIgnoredPlayers());
 
-        final var scrollOffset = scroll * SCROLL_MULTIPLER;
+        final var scrollOffset = scroll * SCROLL_MULTIPLIER;
         final var nbPlayer = players.size();
         renderBackground(context);
         for (int i = 0; i < units; i++) {
@@ -121,7 +123,7 @@ public final class SonicBoomScreen extends Screen {
         if (mouseX < guiLeft + 7 || mouseX > guiLeft + GUI_WIDTH - 7
                 || mouseY < guiTop + HEADER_SIZE || mouseY > guiTop + ySize - FOOTER_SIZE) return null;
 
-        mouseY += scroll * SCROLL_MULTIPLER - guiTop - HEADER_SIZE;
+        mouseY += scroll * SCROLL_MULTIPLIER - guiTop - HEADER_SIZE;
         var index = MathHelper.floor((float) mouseY / UNIT_SIZE);
         if (index < players.size()) {
             return players.remove(index);

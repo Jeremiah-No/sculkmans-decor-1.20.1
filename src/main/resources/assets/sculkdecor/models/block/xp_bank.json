@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "sculkdecor:block/smooth_sculk_bone_block"
+    "all": "sculkdecor:block/sculky_glass"
   }
 }
