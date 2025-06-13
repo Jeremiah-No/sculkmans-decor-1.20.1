@@ -13,14 +13,16 @@ import org.joml.Matrix4f;
 
 @SuppressWarnings("unused")
 public final class XPBankBlockRenderer implements BlockEntityRenderer<XPBankBlockEntity> {
+    private static final float XP_OFFSET = 1.1f;
+
     public XPBankBlockRenderer(BlockEntityRendererFactory.Context ctx) {}
 
     @Override
     public void render(XPBankBlockEntity entity, float tickDelta, MatrixStack matrices,
                        VertexConsumerProvider vertexConsumers, int light, int overlay) {
         matrices.push();
-        matrices.translate(0.5f/16f, 0.5f/16f, 0.5f/16f);
-        matrices.scale(15/16f, 15/16f, 15/16f);
+        matrices.translate(XP_OFFSET/16f, XP_OFFSET/16f, XP_OFFSET/16f);
+        matrices.scale((16 - XP_OFFSET * 2)/16f, (16 - XP_OFFSET * 2)/16f, (16 - XP_OFFSET * 2)/16f);
         var fullPercent = (float)entity.getStoredXP() / (float)XPBankBlockEntity.MAX_STORED_XP;
         entity.renderer_animation = entity.renderer_animation + (fullPercent - entity.renderer_animation) * (tickDelta * 0.1f);
         var progress = entity.renderer_animation;

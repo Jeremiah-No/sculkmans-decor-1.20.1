@@ -35,28 +35,32 @@ public final class XPBank extends GlassBlock implements BlockEntityProvider {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (!world.isClient()) {
-            var be = (XPBankBlockEntity)world.getBlockEntity(pos);
-            assert be != null;
-            var stored = be.getStoredXP();
-            var stack = player.getStackInHand(hand);
-            if (stack.isOf(ModItems.XP_CAPACITOR)) {
+        var be = (XPBankBlockEntity) world.getBlockEntity(pos);
+        assert be != null;
+        var stored = be.getStoredXP();
+        var stack = player.getStackInHand(hand);
+        if (stack.isOf(ModItems.XP_CAPACITOR)) {
+            if (!world.isClient()) {
                 var nbt = stack.getOrCreateNbt();
                 var maxWithdraw = 10 - nbt.getInt(XPCapacitorItem.NBT_STORED_XP_KEY);
                 var withdraw = Math.min(stored, maxWithdraw);
                 nbt.putInt(XPCapacitorItem.NBT_STORED_XP_KEY, withdraw);
                 be.setStoredXP(stored - withdraw);
-            } else if (!player.isSneaking() && stored > 0) {
+            }
+        } else if (!player.isSneaking() && stored > 0) {
+            if (!world.isClient()) {
                 be.setStoredXP(stored - 1);
                 player.addExperienceLevels(1);
-            } else if (player.isSneaking() && player.experienceLevel > 0){
+            }
+        } else if (player.isSneaking() && player.experienceLevel > 0) {
+            if (!world.isClient()) {
                 be.setStoredXP(stored + 1);
                 player.addExperienceLevels(-1);
-            } else {
-                return ActionResult.FAIL;
             }
-            be.markDirty();
+        } else {
+            return ActionResult.FAIL;
         }
+        be.markDirty();
         return ActionResult.SUCCESS;
     }
 }

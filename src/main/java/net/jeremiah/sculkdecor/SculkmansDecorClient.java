@@ -28,7 +28,8 @@ public class SculkmansDecorClient implements ClientModInitializer {
 
         // Register block render layer
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),
-                ModBlocks.SCULKSHROOM,
+                ModBlocks.SCULKSHROOM);
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(),
                 ModBlocks.XP_BANK);
 
         ModelPredicateProviderRegistry.registerCustomModelData((stack, client,
