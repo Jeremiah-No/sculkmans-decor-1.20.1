@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "item": "sculkdecor:sculk_bone_block"
-  },
-  "result": "sculkdecor:smooth_sculk_bone_block"
-}
