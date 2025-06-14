@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "sculkdecor:sculk_bone_block"
-    }
+    { "tag": "sculkdecor:sculk_bone_blocks" }
   ],
   "result": {
     "item": "sculkdecor:sculk_bone",

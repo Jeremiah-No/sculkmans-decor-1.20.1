@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BBB",
+    "BBB"
+  ],
+  "key": {
+    "B": {
+      "item": "sculkdecor:sculk_bone_block"
+    }
+  },
+  "result": {
+    "item": "sculkdecor:sculk_bone_block_wall",
+    "count": 6
+  }
+}
