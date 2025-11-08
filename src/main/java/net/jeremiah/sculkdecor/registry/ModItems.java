@@ -17,12 +17,18 @@ public class ModItems {
     public static final Item SCULK_BONE_BLOCK_SLAB = registerItem("sculk_bone_block_slab", ModBlocks.SCULK_BONE_BLOCK_SLAB);
     public static final Item SCULK_BONE_BLOCK_STAIRS = registerItem("sculk_bone_block_stairs", ModBlocks.SCULK_BONE_BLOCK_STAIRS);
     public static final Item SCULK_BONE_BLOCK_WALL = registerItem("sculk_bone_block_wall", ModBlocks.SCULK_BONE_BLOCK_WALL);
-    public static final Item SONIC_BOOM_GENERATOR = registerItem("sonic_boom_generator", ModBlocks.SONIC_BOOM_GENERATOR);
+
+    // 👇 make it unstackable by passing custom settings
+    public static final Item SONIC_BOOM_GENERATOR =
+            registerItem("sonic_boom_generator", ModBlocks.SONIC_BOOM_GENERATOR, new Item.Settings().maxCount(1));
+
     public static final Item SCULK_BONE_BLOCK_BRICKS = registerItem("sculk_bone_block_bricks", ModBlocks.SCULK_BONE_BLOCK_BRICKS);
     public static final Item CHISELED_SCULK_BONE_BRICKS = registerItem("chiseled_sculk_bone_bricks", ModBlocks.CHISELED_SCULK_BONE_BRICKS);
     public static final Item ECHO_GLAIVE = registerItem("echo_glaive", new EchoGlaiveItem());
     public static final Item XP_CAPACITOR = registerItem("xp_capacitor", new XPCapacitorItem());
     public static final Item XP_BANK = registerItem("xp_bank", ModBlocks.XP_BANK);
+
+    // ---- Existing helper methods ----
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, SculkmansDecor.id(name), item);
@@ -31,6 +37,12 @@ public class ModItems {
     private static Item registerItem(String name, Block block) {
         return Registry.register(Registries.ITEM, SculkmansDecor.id(name),
                 new BlockItem(block, new Item.Settings()));
+    }
+
+    // 👇 NEW overloaded version that allows custom Item.Settings
+    private static Item registerItem(String name, Block block, Item.Settings settings) {
+        return Registry.register(Registries.ITEM, SculkmansDecor.id(name),
+                new BlockItem(block, settings));
     }
 
     public static void register() {

@@ -33,7 +33,7 @@ public final class SonicBoomGeneratorBlockEntity extends BlockEntity {
     public static final Identifier NETWORK_CHANNEL = SculkmansDecor.id("sonic_boom_generator");
 
     private static final int RANGE = 15;
-    private static final float COOLDOWN = 2;
+    private static final float COOLDOWN = 15;
 
     private final Set<GameProfile> ignored = new HashSet<>();
     private GameProfile owner = null;

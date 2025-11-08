@@ -26,7 +26,7 @@ public final class SonicBoomGenerator extends BlockWithEntity {
     private final static VoxelShape SHAPE = VoxelShapes.cuboid(0, 0, 0, 1, 0.5, 1);
 
     public SonicBoomGenerator() {
-        super(Block.Settings.copy(Blocks.BONE_BLOCK).strength(100, 1200));
+        super(Block.Settings.copy(Blocks.BONE_BLOCK).strength(30, 1200));
     }
 
     @Override
