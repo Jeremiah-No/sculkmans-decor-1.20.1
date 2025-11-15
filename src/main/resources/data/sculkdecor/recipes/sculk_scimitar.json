@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " EE",
+    "EB ",
+    "S  "
+  ],
+  "key": {
+    "E": {
+      "item": "minecraft:echo_shard"
+    },
+    "S": {
+      "item": "minecraft:netherite_sword"
+    },
+    "B": {
+      "item": "sculkdecor:sculk_bone"
+    }
+  },
+  "result": {
+    "item": "sculkdecor:echo_glaive",
+    "count": 1
+  }
+}
