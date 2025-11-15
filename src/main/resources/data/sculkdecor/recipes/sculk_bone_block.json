@@ -2,9 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "pattern": [
+    " S ",
     "S#S",
-    "###",
-    "S#S"
+    " S "
   ],
   "key": {
     "#": {
@@ -16,6 +16,6 @@
   },
   "result": {
     "item": "sculkdecor:sculk_bone_block",
-    "count": 5
+    "count": 4
   }
 }

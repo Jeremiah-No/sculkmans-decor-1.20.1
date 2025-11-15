@@ -21,6 +21,8 @@ import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -34,6 +36,9 @@ public final class SonicBoomGeneratorBlockEntity extends BlockEntity {
 
     private static final int RANGE = 15;
     private static final float COOLDOWN = 15;
+    private boolean isCharging = false;        // true while charging
+    private int chargeTicks = 0;              // counts up during charge
+    private static final int CHARGE_DURATION = 40; // 2 seconds if 20 ticks = 1 second
 
     private final Set<GameProfile> ignored = new HashSet<>();
     private GameProfile owner = null;
@@ -95,8 +100,28 @@ public final class SonicBoomGeneratorBlockEntity extends BlockEntity {
                 !((PlayerEntity) e).getAbilities().creativeMode &&
                 !canInteract(((PlayerEntity) e).getGameProfile()));
         if (plr == null) return;
+        if (!isCharging) {
+            // Start charging
+            isCharging = true;
+            chargeTicks = 0;
+            // Play initial charging sound
+            world.playSound(null, pos, SoundEvents.ENTITY_WARDEN_SONIC_CHARGE, SoundCategory.MASTER, 1.0f, 1.0f);
+
+            return;
+        }
+
+// Charging in progress
+        chargeTicks++;
+        if (chargeTicks < CHARGE_DURATION) {
+            // Optional intermittent sound every few ticks
+            if (chargeTicks % 10 == 0) {
+            }
+            return; // still charging
+        }
         final var origin = pos.toCenterPos();
         SonicBoomUtils.create((ServerWorld) world, origin, plr, plr.getPos().subtract(origin));
+        isCharging = false;
+        chargeTicks = 0;
         cooldown = (int) (20 * COOLDOWN);
     }
 

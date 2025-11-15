@@ -2,6 +2,7 @@ package net.jeremiah.sculkdecor;
 
 import com.google.common.collect.ImmutableMultimap;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.jeremiah.sculkdecor.entity.SonicBoomGeneratorBlockEntity;
 import net.jeremiah.sculkdecor.item.EchoGlaiveItem;
@@ -14,6 +15,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -22,6 +24,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
 
 public class SculkmansDecor implements ModInitializer {
     public static final String MOD_ID = "sculkdecor";
@@ -62,6 +66,23 @@ public class SculkmansDecor implements ModInitializer {
                     });
                 }
         );
+        ServerTickEvents.END_SERVER_TICK.register(server -> {
+            Iterator<Map.Entry<PlayerEntity, Integer>> it = EchoGlaiveItem.frozenPlayers.entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry<PlayerEntity, Integer> entry = it.next();
+                PlayerEntity player = entry.getKey();
+                int ticksLeft = entry.getValue();
+
+                // Freeze velocity
+                player.setVelocity(0, 0, 0);
+                player.velocityModified = true;
+
+                // Countdown
+                ticksLeft--;
+                if (ticksLeft <= 0) it.remove();
+                else entry.setValue(ticksLeft);
+            }
+        });
         ServerPlayNetworking.registerGlobalReceiver(SonicBoomGeneratorBlockEntity.NETWORK_CHANNEL,
                 (server, player, handler,
                  buf, responseSender) -> {

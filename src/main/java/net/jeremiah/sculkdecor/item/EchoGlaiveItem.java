@@ -27,24 +27,28 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public final class EchoGlaiveItem extends SwordItem {
     public static final Identifier SONIC_BOOM_PACKET_ID = SculkmansDecor.id("sonic_boom");
     private static final UUID ATTACK_REACH_MODIFIER_ID = UUID.fromString("76a8dee3-3e7e-4e11-ba46-a19b0c724567");
     private static final UUID REACH_MODIFIER_ID = UUID.fromString("a31c8afc-a716-425d-89cd-0d373380e6e7");
-
-    private static final int WARDEN_SPAWN_LEVEL_COST = 25;
-    private static final int WARDEN_HP = 100;
+//todo Make charge for both sonic booms, make the darkness from the warden weaker
+    private static final int WARDEN_SPAWN_LEVEL_COST = 19;
+    private static final int WARDEN_HP = 50;
     private static final int WARDEN_DMG = 8;
-    private static final double WARDEN_SUMMON_COOLDOWN = 120;
+    private static final double WARDEN_SUMMON_COOLDOWN = 60;
     private static final double SONIC_BOOM_RANGE = 20;
-    private static final double SONIC_BOOM_RADIUS = 1.5;
-    private static final double SONIC_BOOM_COOLDOWN = 60;
+    private static final double SONIC_BOOM_RADIUS = 2;
+    private static final double SONIC_BOOM_COOLDOWN = 30;
     private static final int SONIC_BOOM_CASTS = 10;
-
+    public static final Map<PlayerEntity, Integer> frozenPlayers = new HashMap<>();
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
+
 
     public EchoGlaiveItem() {
         super(ModToolMaterial.ECHO_SHARD, 1, 1.2f, new Settings()
@@ -139,8 +143,14 @@ public final class EchoGlaiveItem extends SwordItem {
             }
             ClientPlayNetworking.send(SONIC_BOOM_PACKET_ID, bytes);
             user.playSound(SoundEvents.ENTITY_WARDEN_SONIC_BOOM, SoundCategory.PLAYERS, 4.0f, 1.0f);
+
+
             if (!user.getAbilities().creativeMode) {
                 user.getItemCooldownManager().set(this, (int) (20 * SONIC_BOOM_COOLDOWN));
+                user.setVelocity(0, 0, 0);
+                user.velocityModified = true;
+
+                frozenPlayers.put(user, 30);
             }
             return TypedActionResult.success(handStack, true);
         }

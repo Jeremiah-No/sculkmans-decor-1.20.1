@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "sculkdecor:sculk_bone_block_slab"
+          "name": "sculkdecor:sonic_boom_generator"
         }
       ],
       "rolls": 1.0
