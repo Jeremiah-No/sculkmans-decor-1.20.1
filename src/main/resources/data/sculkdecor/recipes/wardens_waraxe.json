@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " SA",
+    " E ",
+    "B  "
+  ],
+  "key": {
+    "E": {
+      "item": "minecraft:echo_shard"
+    },
+    "A": {
+      "item": "minecraft:netherite_axe"
+    },
+    "S": {
+      "item": "minecraft:sculk"
+    },
+    "B": {
+      "item": "sculkdecor:sculk_bone"
+    }
+  },
+  "result": {
+    "item": "sculkdecor:wardens_waraxe",
+    "count": 1
+  }
+}

@@ -1,0 +1,38 @@
+{
+	"format_version": "1.21.6",
+	"credit": "Made with Blockbench",
+	"parent": "item/handheld",
+	"textures": {
+		"layer0": "sculkdecor:item/wardens_waraxe"
+	},
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [-55, -90, 0],
+			"translation": [0, 1.75, 2],
+			"scale": [1.5, 1.5, 1.5]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [-55, 90, 0],
+			"translation": [0, 1.75, 2],
+			"scale": [1.5, 1.5, 1.5]
+		},
+		"firstperson_righthand": {
+			"rotation": [150, -80, -125],
+			"translation": [1.25, 5.75, 2]
+		},
+		"firstperson_lefthand": {
+			"rotation": [150, 80, 125],
+			"translation": [1.25, 5.75, 2]
+		},
+		"ground": {
+			"rotation": [0, 0, -135],
+			"translation": [0, 7.5, 0]
+		},
+		"gui": {
+			"rotation": [-1, 0, 0]
+		},
+		"on_shelf": {
+			"translation": [0, 0, -2.75]
+		}
+	}
+}
