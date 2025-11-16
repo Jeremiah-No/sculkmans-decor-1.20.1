@@ -29,6 +29,7 @@ public class ModItemGroups {
                         entries.add(ModItems.CHISELED_SCULK_BONE_BRICKS);
                         entries.add(ModItems.SONIC_BOOM_GENERATOR);
                         entries.add(ModItems.ECHO_GLAIVE);
+                        entries.add(ModItems.SCULK_SCIMITAR);
                         entries.add(ModItems.XP_CAPACITOR);
                         entries.add(((XPCapacitorItem)ModItems.XP_CAPACITOR).stackWithCapacity(-1));
                         entries.add(ModItems.SCULKSHROOM);

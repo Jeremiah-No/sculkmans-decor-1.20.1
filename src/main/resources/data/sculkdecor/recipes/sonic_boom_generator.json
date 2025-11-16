@@ -3,14 +3,14 @@
   "pattern": [
     "E E",
     "CSC",
-    "NRN"
+    "NDN"
   ],
   "key": {
     "E": {
       "item": "minecraft:echo_shard"
     },
-    "R": {
-      "item": "minecraft:reinforced_deepslate"
+    "D": {
+      "item": "minecraft:deepslate_tiles"
     },
     "S": {
       "item": "minecraft:sculk_shrieker"

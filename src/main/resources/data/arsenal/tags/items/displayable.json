@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "sculkdecor:echo_glaive"
+    "sculkdecor:echo_glaive",
+    "sculkdecor:sculk_scimitar",
+    "sculkdecor:wardens_waraxe"
   ]
 }
