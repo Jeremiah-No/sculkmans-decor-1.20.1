@@ -7,4 +7,5 @@ public interface WardenEntityExt {
     @Nullable GameProfile sculkdecor$getSummoner();
 
     void sculkdecor$setSummoner(@Nullable GameProfile plr);
+
 }

@@ -34,11 +34,11 @@ import java.util.Set;
 public final class SonicBoomGeneratorBlockEntity extends BlockEntity {
     public static final Identifier NETWORK_CHANNEL = SculkmansDecor.id("sonic_boom_generator");
 
-    private static final int RANGE = 15;
+    private static final int RANGE = 7;
     private static final float COOLDOWN = 15;
-    private boolean isCharging = false;        // true while charging
-    private int chargeTicks = 0;              // counts up during charge
-    private static final int CHARGE_DURATION = 40; // 2 seconds if 20 ticks = 1 second
+    private boolean isCharging = false;
+    private int chargeTicks = 0;
+    private static final int CHARGE_DURATION = 80;
 
     private final Set<GameProfile> ignored = new HashSet<>();
     private GameProfile owner = null;
@@ -105,18 +105,17 @@ public final class SonicBoomGeneratorBlockEntity extends BlockEntity {
             isCharging = true;
             chargeTicks = 0;
             // Play initial charging sound
-            world.playSound(null, pos, SoundEvents.ENTITY_WARDEN_SONIC_CHARGE, SoundCategory.MASTER, 1.0f, 1.0f);
+            world.playSound(null, pos, SoundEvents.ENTITY_WARDEN_SONIC_CHARGE, SoundCategory.MASTER, 2.0f, 1.0f);
 
             return;
         }
 
-// Charging in progress
         chargeTicks++;
         if (chargeTicks < CHARGE_DURATION) {
-            // Optional intermittent sound every few ticks
-            if (chargeTicks % 10 == 0) {
+            if (chargeTicks % 50 == 0) {
+                world.playSound(null, pos, SoundEvents.ENTITY_WARDEN_SONIC_CHARGE, SoundCategory.MASTER, 2.0f, 1.0f);
             }
-            return; // still charging
+            return;
         }
         final var origin = pos.toCenterPos();
         SonicBoomUtils.create((ServerWorld) world, origin, plr, plr.getPos().subtract(origin));

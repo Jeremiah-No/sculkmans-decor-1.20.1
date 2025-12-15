@@ -22,53 +22,59 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(WardenEntity.class)
 public abstract class WardenEntityMixin extends Entity implements WardenEntityExt {
+
     @Unique
     private @Nullable GameProfile summoner;
 
-    private WardenEntityMixin(EntityType<?> type, World world) {
+    protected WardenEntityMixin(EntityType<?> type, World world) {
         super(type, world);
     }
 
     @Inject(method = "isValidTarget", at = @At("HEAD"), cancellable = true)
-    private void sculkdecor$summonerNotTarget(@Nullable Entity entity, CallbackInfoReturnable<Boolean> cir) {
+    private void sculkdecor$preventTargetingSummoner(@Nullable Entity entity, CallbackInfoReturnable<Boolean> cir) {
         if (summoner == null) return;
-        if (entity instanceof PlayerEntity plr && PlayerUtils.playerMatch(plr, summoner)) {
+        if (entity instanceof PlayerEntity player &&
+                PlayerUtils.playerMatch(player, summoner)) {
             cir.setReturnValue(false);
         }
     }
 
-    @Inject(method = "damage",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/WardenEntity;increaseAngerAt(Lnet/minecraft/entity/Entity;IZ)V"),
-            cancellable = true)
-    private void sculkdecor$summonerDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir,
-                                           @Local boolean bl,
-                                           @Local Entity entity) {
-        if (entity instanceof PlayerEntity plr &&
-                PlayerUtils.playerMatch(plr, summoner)) {
+    @Inject(
+            method = "damage",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/entity/mob/WardenEntity;increaseAngerAt(Lnet/minecraft/entity/Entity;IZ)V"
+            ),
+            cancellable = true
+    )
+    private void sculkdecor$ignoreSummonerDamage(
+            DamageSource source,
+            float amount,
+            CallbackInfoReturnable<Boolean> cir,
+            @Local boolean bl,
+            @Local Entity entity
+    ) {
+        if (entity instanceof PlayerEntity player &&
+                PlayerUtils.playerMatch(player, summoner)) {
             cir.setReturnValue(bl);
         }
     }
 
     @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))
-    private void sculkdecor$writeNbt(NbtCompound nbt, CallbackInfo ci) {
+    private void sculkdecor$writeSummoner(NbtCompound nbt, CallbackInfo ci) {
         if (summoner != null) {
-            var gp = new NbtCompound();
+            NbtCompound gp = new NbtCompound();
             NbtHelper.writeGameProfile(gp, summoner);
             nbt.put("Summoner", gp);
         }
     }
 
     @Inject(method = "readCustomDataFromNbt", at = @At("TAIL"))
-    private void sculkdecor$readNbt(NbtCompound nbt, CallbackInfo ci) {
-        try {
-            var gp = nbt.getCompound("Summoner");
-            summoner = NbtHelper.toGameProfile(gp);
-        } catch (Exception e) {
-            if (e instanceof NullPointerException) {
-                summoner = null;
-                return;
-            }
-            throw e;
+    private void sculkdecor$readSummoner(NbtCompound nbt, CallbackInfo ci) {
+        if (nbt.contains("Summoner")) {
+            summoner = NbtHelper.toGameProfile(nbt.getCompound("Summoner"));
+        } else {
+            summoner = null;
         }
     }
 

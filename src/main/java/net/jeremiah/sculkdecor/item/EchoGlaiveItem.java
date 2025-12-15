@@ -44,7 +44,7 @@ public final class EchoGlaiveItem extends SwordItem {
     private static final double WARDEN_SUMMON_COOLDOWN = 60;
     private static final double SONIC_BOOM_RANGE = 20;
     private static final double SONIC_BOOM_RADIUS = 2;
-    private static final double SONIC_BOOM_COOLDOWN = 30;
+    private static final double SONIC_BOOM_COOLDOWN = 0;
     private static final int SONIC_BOOM_CASTS = 10;
     public static final Map<PlayerEntity, Integer> frozenPlayers = new HashMap<>();
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
@@ -92,7 +92,9 @@ public final class EchoGlaiveItem extends SwordItem {
                         WARDEN_DMG - 30, EntityAttributeModifier.Operation.ADDITION));
                 warden.getAttributes().addTemporaryModifiers(attribs.build());
                 warden.setHealth(WARDEN_HP);
-                ((WardenEntityExt) warden).sculkdecor$setSummoner(user.getGameProfile());
+                if (warden instanceof WardenEntityExt ext) {
+                    ext.sculkdecor$setSummoner(user.getGameProfile());
+                }
 
                 if (user.experienceLevel < WARDEN_SPAWN_LEVEL_COST) {
                     var toDamage = WARDEN_SPAWN_LEVEL_COST - user.experienceLevel;
