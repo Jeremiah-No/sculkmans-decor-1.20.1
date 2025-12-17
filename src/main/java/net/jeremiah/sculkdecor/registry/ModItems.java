@@ -1,10 +1,7 @@
 package net.jeremiah.sculkdecor.registry;
 
 import net.jeremiah.sculkdecor.SculkmansDecor;
-import net.jeremiah.sculkdecor.item.EchoGlaiveItem;
-import net.jeremiah.sculkdecor.item.SculkScimitarItem;
-import net.jeremiah.sculkdecor.item.WardensWaraxeItem;
-import net.jeremiah.sculkdecor.item.XPCapacitorItem;
+import net.jeremiah.sculkdecor.item.*;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -26,6 +23,7 @@ public class ModItems {
     public static final Item SCULK_BONE_BLOCK_BRICKS = registerItem("sculk_bone_block_bricks", ModBlocks.SCULK_BONE_BLOCK_BRICKS);
     public static final Item CHISELED_SCULK_BONE_BRICKS = registerItem("chiseled_sculk_bone_bricks", ModBlocks.CHISELED_SCULK_BONE_BRICKS);
     public static final Item ECHO_GLAIVE = registerItem("echo_glaive", new EchoGlaiveItem());
+    public static final Item ECHO_GLAIVETEST = registerItem("echo_glaivetest", new EchoGlaivetestItem());
     public static final Item SCULK_SCIMITAR = registerItem("sculk_scimitar", new SculkScimitarItem());
     public static final Item WARDENS_WARAXE = registerItem("wardens_waraxe", new WardensWaraxeItem());
     public static final Item XP_CAPACITOR = registerItem("xp_capacitor", new XPCapacitorItem());
