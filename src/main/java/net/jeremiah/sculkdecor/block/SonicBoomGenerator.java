@@ -80,7 +80,9 @@ public final class SonicBoomGenerator extends BlockWithEntity {
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (!newState.isOf(state.getBlock())) {
-            GuiUtils.resetClientScreen();
+            if (world.isClient) {
+                GuiUtils.resetClientScreen();
+            }
         }
         super.onStateReplaced(state, world, pos, newState, moved);
     }
