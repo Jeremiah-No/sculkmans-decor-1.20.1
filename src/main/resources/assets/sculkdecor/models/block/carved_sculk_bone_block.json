@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "sculkdecor:block/carved_sculk_bone_block_top",
+    "side": "sculkdecor:block/carved_sculk_bone_block"
+  }
+}

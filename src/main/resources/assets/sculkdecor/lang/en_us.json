@@ -7,8 +7,9 @@
   "item.sculkdecor.wardens_waraxe": "Warden's War Axe",
   "item.sculkdecor.xp_capacitor": "XP Capacitor",
 
-  "block.sculkdecor.sculk_bone_block": "Sculk Bone Block",
   "block.sculkdecor.sculkshroom": "Sculkshroom",
+  "block.sculkdecor.sculk_bone_block": "Sculk Bone Block",
+  "block.sculkdecor.carved_sculk_bone_block": "Carved Sculk Bone Block",
   "block.sculkdecor.smooth_sculk_bone_block": "Smooth Sculk Bone",
   "block.sculkdecor.sonic_boom_generator": "Sonic Boom Generator",
   "block.sculkdecor.sculk_bone_block_bricks": "Sculk Bone Bricks",
@@ -16,7 +17,10 @@
   "block.sculkdecor.sculk_bone_block_wall": "Sculk Bone Block Wall",
   "block.sculkdecor.sculk_bone_block_slab": "Sculk Bone Block Slab",
   "block.sculkdecor.sculk_bone_block_stairs": "Sculk Bone Block Stairs",
+  "block.sculkdecor.sculk_bone_block_crossroads": "Sculk Bone Block Crossroads",
+  "block.sculkdecor.carved_sculk_bone_block_crossroads": "Carved Sculk Bone Block Crossroads",
   "block.sculkdecor.xp_bank": "XP Bank",
+  "enchantment.sculkdecor.friendly_fire": "Friendly Fire",
 
   "block.sculkdecor.sonic_boom_generator.not_owned": "Block not owned!",
   "block.sculkdecor.sonic_boom_generator.not_owned_insist": "Block not owned you moron, stop cheating. Kill yourself!",

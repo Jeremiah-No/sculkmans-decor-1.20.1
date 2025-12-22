@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "sculkdecor:carved_sculk_bone_block_crossroads"
+  },
+  "result": "sculkdecor:sculk_bone_block"
+}

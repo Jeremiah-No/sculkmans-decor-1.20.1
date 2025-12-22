@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "sculkdecor:block/carved_sculk_bone_block",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "sculkdecor:block/carved_sculk_bone_block"
+    },
+    "axis=z": {
+      "model": "sculkdecor:block/carved_sculk_bone_block",
+      "x": 90
+    }
+  }
+}

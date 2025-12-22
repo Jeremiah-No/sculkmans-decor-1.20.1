@@ -1,7 +1,16 @@
 {
   "variants": {
-    "": {
+    "axis=x": {
+      "model": "sculkdecor:block/sculk_bone_block",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
       "model": "sculkdecor:block/sculk_bone_block"
+    },
+    "axis=z": {
+      "model": "sculkdecor:block/sculk_bone_block",
+      "x": 90
     }
   }
 }

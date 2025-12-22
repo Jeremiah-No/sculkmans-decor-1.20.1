@@ -14,12 +14,18 @@ public class ModBlocks {
     private static final Block.Settings BROWN_MUSHROOM_SETTINGS = Block.Settings.copy(Blocks.BROWN_MUSHROOM);
 
     public static final Block SCULK_BONE_BLOCK = registerBlock("sculk_bone_block",
-            new Block(BONE_BLOCK_SETTINGS));
+            new PillarBlock(BONE_BLOCK_SETTINGS));
 
     public static final Block SCULK_BONE_BLOCK_BRICKS = registerBlock("sculk_bone_block_bricks",
             new Block(BONE_BLOCK_SETTINGS));
     public static final Block SMOOTH_SCULK_BONE_BLOCK = registerBlock("smooth_sculk_bone_block",
             new Block(BONE_BLOCK_SETTINGS));
+    public static final Block SCULK_BONE_BLOCK_CROSSROADS = registerBlock("sculk_bone_block_crossroads",
+            new Block(BONE_BLOCK_SETTINGS));
+    public static final Block CARVED_SCULK_BONE_BLOCK_CROSSROADS = registerBlock("carved_sculk_bone_block_crossroads",
+            new Block(BONE_BLOCK_SETTINGS));
+    public static final Block CARVED_SCULK_BONE_BLOCK = registerBlock("carved_sculk_bone_block",
+            new PillarBlock(BONE_BLOCK_SETTINGS));
     public static final Block CHISELED_SCULK_BONE_BRICKS = registerBlock("chiseled_sculk_bone_bricks",
             new Block(BONE_BLOCK_SETTINGS));
     public static final Block SONIC_BOOM_GENERATOR = registerBlock("sonic_boom_generator",

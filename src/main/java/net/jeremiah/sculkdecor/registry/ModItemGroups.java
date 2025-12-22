@@ -21,6 +21,9 @@ public class ModItemGroups {
                     .entries((displayContext, entries) -> {
                         entries.add(ModItems.SCULK_BONE);
                         entries.add(ModItems.SCULK_BONE_BLOCK);
+                        entries.add(ModItems.CARVED_SCULK_BONE_BLOCK);
+                        entries.add(ModItems.SCULK_BONE_BLOCK_CROSSROADS);
+                        entries.add(ModItems.CARVED_SCULK_BONE_BLOCK_CROSSROADS);
                         entries.add(ModItems.SMOOTH_SCULK_BONE_BLOCK);
                         entries.add(ModItems.SCULK_BONE_BLOCK_STAIRS);
                         entries.add(ModItems.SCULK_BONE_BLOCK_WALL);
@@ -30,6 +33,7 @@ public class ModItemGroups {
                         entries.add(ModItems.SONIC_BOOM_GENERATOR);
                         entries.add(ModItems.ECHO_GLAIVE);
                         entries.add(ModItems.SCULK_SCIMITAR);
+                        entries.add(ModItems.WARDENS_WARAXE);
                         entries.add(ModItems.XP_CAPACITOR);
                         entries.add(((XPCapacitorItem)ModItems.XP_CAPACITOR).stackWithCapacity(-1));
                         entries.add(ModItems.SCULKSHROOM);

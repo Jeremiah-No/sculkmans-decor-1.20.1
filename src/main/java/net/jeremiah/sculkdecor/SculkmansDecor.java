@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMultimap;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.jeremiah.sculkdecor.enchantment.ModEnchantments;
 import net.jeremiah.sculkdecor.entity.SonicBoomGeneratorBlockEntity;
 import net.jeremiah.sculkdecor.item.EchoGlaiveItem;
 import net.jeremiah.sculkdecor.registry.ModBlockEntityTypes;
@@ -41,6 +42,7 @@ public class SculkmansDecor implements ModInitializer {
         ModBlockEntityTypes.register();
         ModItems.register();
         ModItemGroups.register();
+        ModEnchantments.register();
 
         ServerPlayNetworking.registerGlobalReceiver(EchoGlaiveItem.SONIC_BOOM_PACKET_ID,
                 (server, player, handler,

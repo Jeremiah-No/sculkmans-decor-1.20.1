@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/slab_top",
   "textures": {
-    "bottom": "sculkdecor:block/sculk_bone_block",
+    "bottom": "sculkdecor:block/sculk_bone_block_top",
     "side": "sculkdecor:block/sculk_bone_block",
-    "top": "sculkdecor:block/sculk_bone_block"
+    "top": "sculkdecor:block/sculk_bone_block_top"
   }
 }

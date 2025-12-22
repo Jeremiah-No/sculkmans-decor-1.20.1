@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/cube_column",
   "textures": {
-    "all": "sculkdecor:block/sculk_bone_block"
+    "end": "sculkdecor:block/sculk_bone_block_top",
+    "side": "sculkdecor:block/sculk_bone_block"
   }
 }

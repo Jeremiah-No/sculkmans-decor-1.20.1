@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "sculkdecor:block/sculk_bone_block_crossroads"
+  }
+}

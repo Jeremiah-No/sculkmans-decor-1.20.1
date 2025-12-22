@@ -6,6 +6,7 @@ import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.jeremiah.sculkdecor.SculkmansDecor;
+import net.jeremiah.sculkdecor.enchantment.ModEnchantments;
 import net.jeremiah.sculkdecor.entity.WardenEntityExt;
 import net.jeremiah.sculkdecor.registry.ModToolMaterial;
 import net.jeremiah.sculkdecor.utils.RaycastUtils;
@@ -26,6 +27,9 @@ import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
+import net.minecraft.enchantment.EnchantmentHelper;
+
+
 
 
 import java.util.ArrayList;
@@ -37,7 +41,6 @@ public final class EchoGlaiveItem extends SwordItem {
     public static final Identifier SONIC_BOOM_PACKET_ID = SculkmansDecor.id("sonic_boom");
     private static final UUID ATTACK_REACH_MODIFIER_ID = UUID.fromString("76a8dee3-3e7e-4e11-ba46-a19b0c724567");
     private static final UUID REACH_MODIFIER_ID = UUID.fromString("a31c8afc-a716-425d-89cd-0d373380e6e7");
-    //todo Make charge for both sonic booms, make the darkness from the warden weaker
     private static final int WARDEN_SPAWN_LEVEL_COST = 19;
     private static final int WARDEN_HP = 50;
     private static final int WARDEN_DMG = 8;
@@ -48,7 +51,6 @@ public final class EchoGlaiveItem extends SwordItem {
     private static final int SONIC_BOOM_CASTS = 10;
     public static final Map<PlayerEntity, Integer> frozenPlayers = new HashMap<>();
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
-
 
     public EchoGlaiveItem() {
         super(ModToolMaterial.ECHO_SHARD, 1, 1.2f, new Settings()
@@ -74,6 +76,9 @@ public final class EchoGlaiveItem extends SwordItem {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         var handStack = user.getStackInHand(hand);
+        boolean hasFriendlyFire =
+                EnchantmentHelper.getLevel(ModEnchantments.FRIENDLY_FIRE, handStack) > 0;
+
         if (user.isSneaking()) {
             if (!world.isClient()) {
                 var warden_opt = LargeEntitySpawnHelper.trySpawnAt(EntityType.WARDEN, SpawnReason.TRIGGERED, (ServerWorld) world,
@@ -84,7 +89,6 @@ public final class EchoGlaiveItem extends SwordItem {
                 }
                 var warden = warden_opt.get();
 
-                // Give Warden custom effects or attributes if needed
                 ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> attribs = new ImmutableMultimap.Builder<>();
                 attribs.put(EntityAttributes.GENERIC_MAX_HEALTH, new EntityAttributeModifier("generic.max_health",
                         WARDEN_HP - 500, EntityAttributeModifier.Operation.ADDITION));
@@ -125,7 +129,7 @@ public final class EchoGlaiveItem extends SwordItem {
             for (int i = 0; i < SONIC_BOOM_CASTS; i++) {
                 final var entities = world.getEntitiesByClass(LivingEntity.class, box, e -> !e.isSpectator()
                         && !e.isInvulnerableTo(user.getDamageSources().magic())
-                        && e != user
+                        && (!e.equals(user) || hasFriendlyFire)
                         && !allTargets.contains(e));
                 final var result = RaycastUtils.spherecast(entities, origin, end, SONIC_BOOM_RADIUS);
 
@@ -149,8 +153,9 @@ public final class EchoGlaiveItem extends SwordItem {
                 user.getItemCooldownManager().set(this, (int) (20 * SONIC_BOOM_COOLDOWN));
                 user.setVelocity(0, 0, 0);
                 user.velocityModified = true;
-
-                frozenPlayers.put(user, 30);
+                if (!hasFriendlyFire) {
+                    frozenPlayers.put(user, 30);
+                }
             }
             return TypedActionResult.success(handStack, true);
         }
