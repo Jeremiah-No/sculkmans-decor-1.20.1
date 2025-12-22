@@ -101,7 +101,7 @@ public final class EchoGlaiveItem extends SwordItem {
                 if (user.experienceLevel < WARDEN_SPAWN_LEVEL_COST) {
                     var toDamage = WARDEN_SPAWN_LEVEL_COST - user.experienceLevel;
                     user.addExperienceLevels(-user.experienceLevel);
-                    user.damage(user.getDamageSources().magic(), toDamage);
+                    user.damage(user.getDamageSources().sonicBoom(user), toDamage);
                 } else {
                     user.addExperienceLevels(-WARDEN_SPAWN_LEVEL_COST);
                 }
@@ -128,7 +128,7 @@ public final class EchoGlaiveItem extends SwordItem {
 
             for (int i = 0; i < SONIC_BOOM_CASTS; i++) {
                 final var entities = world.getEntitiesByClass(LivingEntity.class, box, e -> !e.isSpectator()
-                        && !e.isInvulnerableTo(user.getDamageSources().magic())
+                        && !e.isInvulnerableTo(user.getDamageSources().sonicBoom(user))
                         && (!e.equals(user) || hasFriendlyFire)
                         && !allTargets.contains(e));
                 final var result = RaycastUtils.spherecast(entities, origin, end, SONIC_BOOM_RADIUS);
