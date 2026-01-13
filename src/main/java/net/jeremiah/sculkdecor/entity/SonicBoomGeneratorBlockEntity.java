@@ -101,10 +101,8 @@ public final class SonicBoomGeneratorBlockEntity extends BlockEntity {
                 !canInteract(((PlayerEntity) e).getGameProfile()));
         if (plr == null) return;
         if (!isCharging) {
-            // Start charging
             isCharging = true;
             chargeTicks = 0;
-            // Play initial charging sound
             world.playSound(null, pos, SoundEvents.ENTITY_WARDEN_SONIC_CHARGE, SoundCategory.MASTER, 2.0f, 1.0f);
 
             return;

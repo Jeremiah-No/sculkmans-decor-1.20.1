@@ -4,13 +4,11 @@ import com.google.common.collect.ImmutableMultimap;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.jeremiah.sculkdecor.client.CameraStunHandler;
 import net.jeremiah.sculkdecor.enchantment.ModEnchantments;
 import net.jeremiah.sculkdecor.entity.SonicBoomGeneratorBlockEntity;
 import net.jeremiah.sculkdecor.item.EchoGlaiveItem;
-import net.jeremiah.sculkdecor.registry.ModBlockEntityTypes;
-import net.jeremiah.sculkdecor.registry.ModBlocks;
-import net.jeremiah.sculkdecor.registry.ModItemGroups;
-import net.jeremiah.sculkdecor.registry.ModItems;
+import net.jeremiah.sculkdecor.registry.*;
 import net.jeremiah.sculkdecor.utils.SonicBoomUtils;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
@@ -43,6 +41,7 @@ public class SculkmansDecor implements ModInitializer {
         ModItems.register();
         ModItemGroups.register();
         ModEnchantments.register();
+        CameraStunHandler.register();
 
         ServerPlayNetworking.registerGlobalReceiver(EchoGlaiveItem.SONIC_BOOM_PACKET_ID,
                 (server, player, handler,

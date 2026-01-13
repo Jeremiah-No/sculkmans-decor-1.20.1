@@ -6,6 +6,7 @@ import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.jeremiah.sculkdecor.SculkmansDecor;
+import net.jeremiah.sculkdecor.client.CameraStunHandler;
 import net.jeremiah.sculkdecor.enchantment.ModEnchantments;
 import net.jeremiah.sculkdecor.entity.WardenEntityExt;
 import net.jeremiah.sculkdecor.registry.ModToolMaterial;
@@ -28,6 +29,7 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.LivingEntity;
 
 
 
@@ -44,10 +46,10 @@ public final class EchoGlaiveItem extends SwordItem {
     private static final int WARDEN_SPAWN_LEVEL_COST = 19;
     private static final int WARDEN_HP = 50;
     private static final int WARDEN_DMG = 8;
-    private static final double WARDEN_SUMMON_COOLDOWN = 60;
+    private static final double WARDEN_SUMMON_COOLDOWN = 40;
     private static final double SONIC_BOOM_RANGE = 20;
     private static final double SONIC_BOOM_RADIUS = 2;
-    private static final double SONIC_BOOM_COOLDOWN = 30;
+    private static final double SONIC_BOOM_COOLDOWN = 60;
     private static final int SONIC_BOOM_CASTS = 10;
     public static final Map<PlayerEntity, Integer> frozenPlayers = new HashMap<>();
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
@@ -72,6 +74,8 @@ public final class EchoGlaiveItem extends SwordItem {
     public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
         return slot == EquipmentSlot.MAINHAND ? this.attributeModifiers : super.getAttributeModifiers(slot);
     }
+
+
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
@@ -148,18 +152,20 @@ public final class EchoGlaiveItem extends SwordItem {
             ClientPlayNetworking.send(SONIC_BOOM_PACKET_ID, bytes);
             user.playSound(SoundEvents.ENTITY_WARDEN_SONIC_BOOM, SoundCategory.PLAYERS, 4.0f, 1.0f);
 
-
             if (!user.getAbilities().creativeMode) {
                 user.getItemCooldownManager().set(this, (int) (20 * SONIC_BOOM_COOLDOWN));
+
                 user.setVelocity(0, 0, 0);
                 user.velocityModified = true;
                 if (!hasFriendlyFire) {
-                    frozenPlayers.put(user, 30);
+                        frozenPlayers.put(user, 100);
+                        CameraStunHandler.stun(100);
                 }
             }
             return TypedActionResult.success(handStack, true);
         }
         return TypedActionResult.pass(handStack);
+
     }
 
 }
