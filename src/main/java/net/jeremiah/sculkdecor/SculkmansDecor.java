@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableMultimap;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.jeremiah.sculkdecor.client.CameraStunHandler;
 import net.jeremiah.sculkdecor.enchantment.ModEnchantments;
 import net.jeremiah.sculkdecor.entity.SonicBoomGeneratorBlockEntity;
 import net.jeremiah.sculkdecor.item.EchoGlaiveItem;
@@ -41,7 +40,6 @@ public class SculkmansDecor implements ModInitializer {
         ModItems.register();
         ModItemGroups.register();
         ModEnchantments.register();
-        CameraStunHandler.register();
 
         ServerPlayNetworking.registerGlobalReceiver(EchoGlaiveItem.SONIC_BOOM_PACKET_ID,
                 (server, player, handler,
@@ -74,11 +72,11 @@ public class SculkmansDecor implements ModInitializer {
                 PlayerEntity player = entry.getKey();
                 int ticksLeft = entry.getValue();
 
-                // Freeze velocity
+
                 player.setVelocity(0, 0, 0);
                 player.velocityModified = true;
 
-                // Countdown
+
                 ticksLeft--;
                 if (ticksLeft <= 0) it.remove();
                 else entry.setValue(ticksLeft);

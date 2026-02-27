@@ -6,7 +6,6 @@ import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.jeremiah.sculkdecor.SculkmansDecor;
-import net.jeremiah.sculkdecor.client.CameraStunHandler;
 import net.jeremiah.sculkdecor.enchantment.ModEnchantments;
 import net.jeremiah.sculkdecor.entity.WardenEntityExt;
 import net.jeremiah.sculkdecor.registry.ModToolMaterial;
@@ -50,6 +49,7 @@ public final class EchoGlaiveItem extends SwordItem {
     private static final double SONIC_BOOM_RANGE = 20;
     private static final double SONIC_BOOM_RADIUS = 2;
     private static final double SONIC_BOOM_COOLDOWN = 60;
+    private static final double FRIENDLY_FIRE_COOLDOWN = 15;
     private static final int SONIC_BOOM_CASTS = 10;
     public static final Map<PlayerEntity, Integer> frozenPlayers = new HashMap<>();
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
@@ -153,13 +153,15 @@ public final class EchoGlaiveItem extends SwordItem {
             user.playSound(SoundEvents.ENTITY_WARDEN_SONIC_BOOM, SoundCategory.PLAYERS, 4.0f, 1.0f);
 
             if (!user.getAbilities().creativeMode) {
-                user.getItemCooldownManager().set(this, (int) (20 * SONIC_BOOM_COOLDOWN));
-
+                if (!hasFriendlyFire) {
+                    user.getItemCooldownManager().set(this, (int) (20 * SONIC_BOOM_COOLDOWN));
+                } else {
+                    user.getItemCooldownManager().set(this, (int) (20 * FRIENDLY_FIRE_COOLDOWN));
+                }
                 user.setVelocity(0, 0, 0);
                 user.velocityModified = true;
                 if (!hasFriendlyFire) {
                         frozenPlayers.put(user, 100);
-                        CameraStunHandler.stun(100);
                 }
             }
             return TypedActionResult.success(handStack, true);
